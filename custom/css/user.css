@@ -1,0 +1,90 @@
+#myCarousel {
+    margin-bottom: 70px;
+}
+
+li.dropdown:active .dropdown-menu {
+    display: none;
+}
+
+li.dropdown:visited .dropdown-menu {
+    display: none;
+}
+
+.submenu {
+    text-align: left;
+    font-size: 13px;
+    color: #616161;
+    font-weight: 600;
+}
+
+.dropdown-menu.multi {
+    min-width: 555px;
+    padding: 23px 9px;
+}
+
+.dropdown-menu {
+    top: 98%;
+    left: -54%;
+}
+
+.container-fluid {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+li.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.name_product {
+    word-wrap: break-word;
+    height: 3.5rem;
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 14px;
+}
+
+.offer-img img {
+    margin: 0 auto;
+    width: 140px;
+    height: 140px;
+}
+
+.mota {
+    font-size: 14px;
+    line-height: 25px;
+    text-align: justify;
+}
+
+.dropdown-menu.multi .col-sm-3 {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.dropdown-menu.multi .col-sm-4 {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.spec h3 {
+    font-size: 35px;
+}
+
+.muangay {
+    color: #fab005;
+    border: 2px solid #fab005;
+}
+
+.muangay:hover,
+.muangay:focus,
+.muangay:active {
+    border: 2px solid #fab005;
+}
+
+.muangay:before {
+    border: 2px solid #fab005;
+    background: #fab005;
+}

@@ -1,0 +1,144 @@
+* {
+    margin: 0
+}
+
+.khoianh {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.khoianh i {
+    font-size: 110px;
+    left: 40%;
+    color: #d6dbeb;
+    margin: auto;
+}
+
+.khoianh input {
+    width: 28%;
+    height: 115px;
+    left: 36%;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    position: absolute;
+}
+
+span.currency-input {
+    position: absolute;
+    top: 21%;
+    right: 2%;
+}
+
+.pos-r {
+    position: relative;
+}
+
+.panel-body {
+    padding: 15px;
+}
+
+.panel-heading {
+    background: #337ab7;
+    padding: 1px;
+}
+
+.panel-heading h3 {
+    font-size: 18px;
+    color: white;
+    padding-top: 5px;
+    padding-left: 7px;
+}
+
+.panel.panel-primary {
+    border: 1px solid #337ab7;
+    border-radius: 4px;
+    /* padding: 10px; */
+}
+
+#main-wrapper[data-sidebartype=full] .page-wrapper {
+    margin-left: 0px;
+}
+
+.page-wrapper {
+    margin-left: 0px;
+    min-height: 500px;
+    background: white;
+}
+
+.form-control,
+.select2-selection--single {
+    border: 1px solid #cecece !important;
+}
+
+.box-border {
+    height: fit-content;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px #fb8c0040, 0 1px 4px 1px #fb8c003b;
+}
+
+.select2-container--default .select2-selection--multiple {
+    /* height: auto; */
+    border: 1px solid #cecece !important;
+}
+
+.select2-container--default .select2-selection--multiple,
+.select2-container--default .select2-selection--single {
+    line-height: 1.5;
+    height: auto;
+}
+
+label {
+    font-weight: 700;
+}
+
+.img-thumbnail {
+    max-width: 48%;
+}
+
+.btn-warning {
+    background-color: #ff9c00;
+    border-color: #ff9c00;
+}
+
+.slectimg {
+    display: flex;
+}
+
+thead>tr>th {
+    font-weight: 700 !important;
+}
+
+
+/*
+.page-link,
+.page-link:hover {
+    color: #ff9c00;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #ff9c00;
+    border-color: #ff9c00;
+} */
+
+.wizard>.content {
+    background: #fff !important;
+}
+
+.flex {
+    display: flex;
+}
+
+.switch {
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 0px;
+}
+
+@media (min-width: 768px) {
+    #main-wrapper[data-sidebartype=full] .topbar .top-navbar .navbar-header {
+        width: 150px;
+    }
+}
