@@ -22,7 +22,9 @@ class CreateSalesTable extends Migration
             $table->string('amount_applied');
             $table->integer('price_from')->nullable();
             $table->integer('price_to')->nullable();
+            $table->float('discount')->nullable();
             $table->string('unit')->nullable();
+            $table->string('sale_all')->nullable();
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->timestamps();

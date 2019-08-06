@@ -154,8 +154,8 @@
                                 <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{url('admin/sale/create')}}">Thêm sản phẩm</a>
-                                <a class="dropdown-item" href="{{url('admin/sale')}}">Danh sách sản phẩm</a>
+                                <a class="dropdown-item" href="{{url('admin/sale/create')}}">Thêm khuyến mãi</a>
+                                <a class="dropdown-item" href="{{url('admin/sale')}}">Danh sách khuyến mãi</a>
                             </div>
                         </li>
                         <!-- ============================================================== -->

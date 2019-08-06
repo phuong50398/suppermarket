@@ -29,6 +29,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // ajax
     Route::post('ajaxSaveClassify','admin\ProductController@ajaxSaveClassify');
     Route::post('ajaxSaveProvider','admin\BillImportController@ajaxSaveProvider');
+    Route::post('sale/create/ajaxSanPham', 'admin\SaleController@ajaxSanPham');
+    Route::post('sale/create/ajaxCategoryType', 'admin\SaleController@ajaxCategoryType');
+    Route::post('sale/create/ajaxProducer', 'admin\SaleController@ajaxProducer');
+    Route::post('sale/create/ajaxProvider', 'admin\SaleController@ajaxProvider');
 });
 
 

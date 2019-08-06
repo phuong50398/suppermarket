@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="col-md-12 col-lg-12 col-xlg-12 p-t-30 row p-r-50 p-l-50">
-            <form action="{{(isset($action)) ? route('billImport.update', $billImport->id) : route('billImport.store')}}" method="POST" class=" w-100">
+            <form action="{{(isset($action)) ? route('sale.update', $billImport->id) : route('sale.store')}}" method="POST" class=" w-100">
             @csrf
             {{(isset($action)) ? method_field('PUT') : ""}}
                  <div class="row">
@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group">
                             <label for="fname" class=" control-label col-form-label">Mã chương trình (*)</label>
-                            <input required type="text" class="form-control" name="name">
+                            <input required type="text" class="form-control" name="code">
                         </div>
                         <div class="form-group">
                             <label for="fname" class=" control-label col-form-label">Phương thức khuyến mãi (*)</label>
@@ -50,11 +50,11 @@
                             <label for="fname" class="control-label col-form-label">Số lượng áp dụng (*)</label>
                             <div class="row">
                                 <div class="col-md-7">
-                                    <input required type="number" class="form-control" name="">
+                                    <input type="number" class="form-control" name="amount_applied">
                                 </div>
                                 <div class="col-md-5">
                                     <div class="custom-control custom-checkbox m-t-5">
-                                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing1" name="active" value="1" {{(isset($action) && old('active', $categoryType->active)==1) ? "checked" : ""}}>
+                                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing1" name="unlimit" value="1" {{(isset($action) && old('active', $categoryType->active)==1) ? "checked" : ""}}>
                                         <label class="custom-control-label" for="customControlAutosizing1">Không giới hạn</label>
                                     </div>
                                 </div>
@@ -62,19 +62,17 @@
                         </div>
                         <div class="form-group">
                             <label for="fname" class=" control-label col-form-label">Từ ngày (*)</label>
-                            <input required type="text" class="form-control datetime" name="" >
+                            <input required type="text" class="form-control datetime" name="start_time" >
                         </div>
                         <div class="form-group">
                             <label for="fname" class=" control-label col-form-label">Đến ngày (*)</label>
-                            <input required type="text" class="form-control datetime" name="" >
+                            <input required type="text" class="form-control datetime" name="end_time" >
                         </div>
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <div class="row selectsp">
-
+                    <div class="row selectsp m-b-10">
                     </div>
-
                     <table class="table table-bordered" id="tblRender">
                         {{-- <thead>
                             <th>1</th>
@@ -83,6 +81,9 @@
                         </thead> --}}
 
                     </table>
+                </div>
+                <div class="col-md-12 text-center m-t-20">
+                    <button type="submit" class="btn btn-success"><i class=" fas fa-save" aria-hidden="true"></i> Lưu</button>
                 </div>
             </form>
         </div>
@@ -108,6 +109,10 @@
     .lblsp{
         min-width: 115px;
         margin: auto;
+    }
+    .btn-outline-danger{
+        padding: 4px;
+        padding-bottom: 0px;
     }
 </style>
 @endsection
