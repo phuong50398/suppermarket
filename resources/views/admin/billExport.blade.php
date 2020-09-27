@@ -50,18 +50,18 @@
                                     </label>
                                 </th>
                                 <td>{{date('d/m/Y', strtotime($item->date_of_export))}}</td>
-                                <td>{!! ($item->chuyenhang == 1) ? "<label class='badge badge-success'>Đã chuyển hàng</label>" : "<label class='badge badge-secondary'>Đang chuyển hàng</label>" !!}</td>
+                                <td>{!! ($item->status == 1) ? "<label class='badge badge-success'>Đã chuyển hàng</label>" : "<label class='badge badge-secondary'>Đang chuyển hàng</label>" !!}</td>
                                 <td>{{$item->bill_detail_count}}</td>
                                 <td>{{number_format($item->cost)}}</td>
                                 <td>{{number_format($item->payments)}}</td>
                                 <td>
-                                    @if ($item->chuyenhang==1)
+                                    @if ($item->status==1)
                                         <a href="{{url('admin/billExport/'.$item->id.'/edit')}}"><button class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Xem</button></a>
                                     @else
                                         <form action="{{route('billExport.update', $item->id)}}" method="POST" style="display: contents;">
                                             @method('PUT')
                                             @csrf
-                                            <button name="nhapkho" value="nhapkho" type="submit" class="btn btn-success btn-sm">Đã chuyển</button>
+                                            <button name="status" value="chuyenhang" type="submit" class="btn btn-success btn-sm">Đã chuyển</button>
                                         </form>
                                         <a href="{{url('admin/billExport/'.$item->id.'/edit')}}"><button class="btn btn-warning btn-sm">Sửa</button></a>
                                         <form action="{{route('billExport.destroy', $item->id)}}" method="POST" style="display: contents;">

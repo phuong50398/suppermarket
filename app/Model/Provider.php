@@ -14,6 +14,6 @@ class Provider extends Model
     {
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = str_slug($value);
-        $this->attributes['code'] = firstchars($value);
+        $this->attributes['code'] = firstchars($value).rand(100,999);
     }
 }

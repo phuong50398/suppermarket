@@ -15,12 +15,12 @@ class CreateWarehousesTable extends Migration
     {
         Schema::create('warehouses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('thang');
-            $table->integer('nam');
-            $table->integer('tondau');
-            $table->integer('tongnhap');
-            $table->integer('tongxuat');
-            $table->integer('toncuoi');
+            $table->integer('month');
+            $table->integer('year');
+            $table->integer('begin_inventory');
+            $table->integer('sum_import');
+            $table->integer('sum_export');
+            $table->integer('end_inventory');
             $table->bigInteger('product_id')->unsigned();
             $table->timestamps();
 

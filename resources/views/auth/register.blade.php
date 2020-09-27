@@ -1,11 +1,10 @@
-@extends('layouts.master')
+@extends('layouts.blank')
 
 @section('content')
-@include('shared.menu')
 <div class="login">
     <div class="main-agileits">
         <div class="form-w3agile form1">
-            <h3>Register</h3>
+            <h3>Đăng ký</h3>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 @error('name')
@@ -45,10 +44,13 @@
                     <input id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Nhập lại mật khẩu" >
                     <div class="clearfix"></div>
                 </div>
-                <input type="submit" value="Submit">
+                <input type="submit" value="Đăng ký">
             </form>
         </div>
-
+        <div class="forg">
+            <a href="login" class="forg-right">Đăng nhập</a>
+            <div class="clearfix"></div>
+        </div>
     </div>
 </div>
 

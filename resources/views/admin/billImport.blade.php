@@ -51,19 +51,19 @@
                                     </label>
                                 </th>
                                 <td>{{$provider[$item->provider_id]}}</td>
-                                <td>{!! ($item->nhapkho == 1) ? "<label class='badge badge-success'>Đã nhập kho</label>" : "<label class='badge badge-secondary'>Chờ nhập hàng</label>" !!}</td>
+                                <td>{!! ($item->status == 1) ? "<label class='badge badge-success'>Đã nhập kho</label>" : "<label class='badge badge-secondary'>Chờ nhập hàng</label>" !!}</td>
                                 <td>{{date('d/m/Y', strtotime($item->date_of_import))}}</td>
                                 <td>{{$item->bill_detail_count}}</td>
                                 <td>{{number_format($item->cost)}}</td>
                                 <td>{{number_format($item->payments)}}</td>
                                 <td>
-                                    @if ($item->nhapkho==1)
+                                    @if ($item->status==1)
                                         <a href="{{url('admin/billImport/'.$item->id.'/edit')}}"><button class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Xem</button></a>
                                     @else
                                         <form action="{{route('billImport.update', $item->id)}}" method="POST" style="display: contents;">
                                             @method('PUT')
                                             @csrf
-                                            <button name="nhapkho" value="nhapkho" type="submit" class="btn btn-success btn-sm">Nhập kho</button>
+                                            <button name="status" value="nhapkho" type="submit" class="btn btn-success btn-sm">Nhập kho</button>
                                         </form>
                                         <a href="{{url('admin/billImport/'.$item->id.'/edit')}}"><button class="btn btn-warning btn-sm">Sửa</button></a>
                                         <form action="{{route('billImport.destroy', $item->id)}}" method="POST" style="display: contents;">

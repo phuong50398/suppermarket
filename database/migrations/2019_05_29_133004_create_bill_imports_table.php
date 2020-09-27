@@ -20,7 +20,7 @@ class CreateBillImportsTable extends Migration
             $table->bigInteger('provider_id')->unsigned();
             $table->integer('cost')->nullable();
             $table->string('note')->nullable();
-            $table->integer('nhapkho');
+            $table->integer('status');
             $table->bigInteger('payments')->nullable();
             $table->timestamps();
 

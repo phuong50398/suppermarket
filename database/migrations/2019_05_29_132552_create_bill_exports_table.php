@@ -17,7 +17,6 @@ class CreateBillExportsTable extends Migration
             $table->bigIncrements('id');
             $table->dateTime('date_of_export');
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('employees_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');

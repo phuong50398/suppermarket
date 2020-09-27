@@ -17,7 +17,7 @@ class CreateProducersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->nullable();
-            $table->string('sdt')->nullable();
+            $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('code')->unique();
             $table->string('slug')->unique();

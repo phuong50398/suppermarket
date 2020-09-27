@@ -106,11 +106,11 @@
                 </div>
                 <div class="col-md-12 text-right m-t-30 p-r-50">
                     @if (isset($action))
-                    <button type="submit" class="btn btn-info" name="nhapkho" value="0" {{($billImport->nhapkho==1) ? "disabled" : ""}}><i class=" fas fa-save" aria-hidden="true"></i> Cập nhật đơn nhập hàng</button>
-                    <button type="submit" class="btn btn-success" name="nhapkho" value="1" {{($billImport->nhapkho==1) ? "disabled" : ""}}><i class="fas fa-check" aria-hidden="true"></i> Cập nhật đơn nhập hàng và Nhập kho</button>
+                    <button type="submit" class="btn btn-info" name="status" value="0" {{($billImport->status==1) ? "disabled" : ""}}><i class=" fas fa-save" aria-hidden="true"></i> Cập nhật đơn nhập hàng</button>
+                    <button type="submit" class="btn btn-success" name="status" value="1" {{($billImport->status==1) ? "disabled" : ""}}><i class="fas fa-check" aria-hidden="true"></i> Cập nhật đơn nhập hàng và Nhập kho</button>
                     @else
-                    <button type="submit" class="btn btn-info" name="nhapkho" value="0"><i class=" fas fa-save" aria-hidden="true"></i> Tạo đơn nhập hàng</button>
-                    <button type="submit" class="btn btn-success" name="nhapkho" value="1"><i class="fas fa-check" aria-hidden="true"></i> Tạo đơn nhập hàng và Nhập kho</button>
+                    <button type="submit" class="btn btn-info" name="status" value="0"><i class=" fas fa-save" aria-hidden="true"></i> Tạo đơn nhập hàng</button>
+                    <button type="submit" class="btn btn-success" name="status" value="1"><i class="fas fa-check" aria-hidden="true"></i> Tạo đơn nhập hàng và Nhập kho</button>
                     @endif
                 </div>
             </form>

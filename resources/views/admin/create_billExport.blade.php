@@ -106,11 +106,11 @@
                 </div>
                 <div class="col-md-12 text-right m-t-30 p-r-50">
                     @if (isset($action))
-                    <button type="submit" class="btn btn-info" name="chuyenhang" value="0" {{($billExport->chuyenhang==1) ? "disabled" : ""}}><i class=" fas fa-save" aria-hidden="true"></i> Cập nhật đơn chuyển hàng</button>
-                    <button type="submit" class="btn btn-success" name="chuyenhang" value="1" {{($billExport->chuyenhang==1) ? "disabled" : ""}}><i class="fas fa-check" aria-hidden="true"></i> Cập nhật đơn chuyển hàng và Xác nhận chuyển xong</button>
+                    <button type="submit" class="btn btn-info" name="status" value="0" {{($billExport->status==1) ? "disabled" : ""}}><i class=" fas fa-save" aria-hidden="true"></i> Cập nhật đơn chuyển hàng</button>
+                    <button type="submit" class="btn btn-success" name="status" value="1" {{($billExport->status==1) ? "disabled" : ""}}><i class="fas fa-check" aria-hidden="true"></i> Cập nhật đơn chuyển hàng và Xác nhận chuyển xong</button>
                     @else
-                    <button type="submit" class="btn btn-info" name="chuyenhang" value="0"><i class=" fas fa-save" aria-hidden="true"></i> Tạo đơn chuyển hàng</button>
-                    <button type="submit" class="btn btn-success" name="chuyenhang" value="1"><i class="fas fa-check" aria-hidden="true"></i> Tạo đơn chuyển hàng và Xác nhận chuyển xong</button>
+                    <button type="submit" class="btn btn-info" name="status" value="0"><i class=" fas fa-save" aria-hidden="true"></i> Tạo đơn chuyển hàng</button>
+                    <button type="submit" class="btn btn-success" name="status" value="1"><i class="fas fa-check" aria-hidden="true"></i> Tạo đơn chuyển hàng và Xác nhận chuyển xong</button>
                     @endif
                 </div>
             </form>

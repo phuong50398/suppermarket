@@ -21,7 +21,7 @@ class CreateBillExportDetailsTable extends Migration
             $table->float('price_export');
             $table->integer('cost')->nullable();
             $table->string('note')->nullable();
-            $table->integer('chuyenhang');
+            $table->integer('status');
             $table->timestamps();
             $table->primary(array('bill_export_id', 'product_id'));
 

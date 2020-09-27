@@ -64,7 +64,7 @@ class BillImportController extends Controller
         $billImport->cost = str_replace(',','',$request->cost);
         $billImport->note = $request->note;
         $billImport->date_of_import = date('Y-m-d H:i:s', time());
-        $billImport->nhapkho = $request->nhapkho;
+        $billImport->status = $request->status;
 
         $listAmount = $request->amount;
         $listPrice = $request->price;
@@ -138,9 +138,9 @@ class BillImportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($request->nhapkho=='nhapkho'){
+        if($request->status=='nhapkho'){
             $billImport = BillImport::find($id);
-            $billImport->nhapkho = 1;
+            $billImport->status = 1;
             $billImport->date_of_import = date('Y-m-d H:i:s', time());
             $billImport->save();
             $listProduct = BillImportDetail::where('bill_import_id', $id)->pluck('product_id');
@@ -154,7 +154,7 @@ class BillImportController extends Controller
             $billImport->cost = str_replace(',','',$request->cost);
             $billImport->note = $request->note;
             $billImport->date_of_import = date('Y-m-d H:i:s', time());
-            $billImport->nhapkho = $request->nhapkho;
+            $billImport->status = $request->status;
 
             $listAmount = $request->amount;
             $listPrice = $request->price;
@@ -201,51 +201,51 @@ class BillImportController extends Controller
         foreach ($arrIdProduct as $key => $value) {
             $warehouse = new Warehouse();
             $productWarehouse = DB::table('warehouses')->where('product_id', $value)
-                                ->orderBy('nam', 'desc')
-                                ->orderBy('thang', 'desc')
+                                ->orderBy('year', 'desc')
+                                ->orderBy('month', 'desc')
                                 ->limit(1)
                                 ->get();
-            // dd($productWarehouse->thang);
+                                
             if($productWarehouse->toArray()==null){
-                $warehouse->tondau = 0;
+                $warehouse->begin_inventory = 0;
             }else{
                 $productWarehouse = $productWarehouse[0];
-                if($productWarehouse->thang==date('m',time()) && $productWarehouse->nam==date('Y',time())){
-                    $warehouse->tondau = $productWarehouse->tondau;
+                if($productWarehouse->month==date('m',time()) && $productWarehouse->year==date('Y',time())){
+                    $warehouse->begin_inventory = $productWarehouse->begin_inventory;
                 }else{
-                    $warehouse->tondau = $productWarehouse->toncuoi;
+                    $warehouse->begin_inventory = $productWarehouse->end_inventory;
                 }
             }
 
             $billImport = DB::table('bill_imports')->whereMonth('date_of_import', '=', date('m',time()))
                         ->whereYear('date_of_import', '=', date('Y',time()))
-                        ->where('nhapkho', 1)
+                        ->where('status', 1)
                         ->join('bill_import_details', 'bill_imports.id', '=', 'bill_import_details.bill_import_id')
                         ->where('product_id', $value)->get();
             if($billImport->toArray()==null){
-                $warehouse->tongnhap = 0;
+                $warehouse->sum_import = 0;
             }else{
-                $warehouse->tongnhap = array_sum(array_column($billImport->toArray(), 'amount_import'));
+                $warehouse->sum_import = array_sum(array_column($billImport->toArray(), 'amount_import'));
             }
 
             $billExport = DB::table('bill_exports')->whereMonth('date_of_export', '=', date('m',time()))
                         ->whereYear('date_of_export', '=', date('Y',time()))
-                        ->where('chuyenhang', 1)
+                        ->where('status', 1)
                         ->join('bill_export_details', 'bill_exports.id', '=', 'bill_export_details.bill_export_id')
                         ->where('product_id', $value)->get();
-            $warehouse->tongxuat = ($billExport->toArray()==null) ? 0 : array_sum(array_column($billExport->toArray(), 'amount_export'));
-            $warehouse->toncuoi = $warehouse->tondau + $warehouse->tongnhap - $warehouse->tongxuat;
+            $warehouse->sum_export = ($billExport->toArray()==null) ? 0 : array_sum(array_column($billExport->toArray(), 'amount_export'));
+            $warehouse->end_inventory = $warehouse->begin_inventory + $warehouse->sum_import - $warehouse->sum_export;
             $wh = Warehouse::firstOrNew(
                 array(
-                    'thang' => date('m',time()),
-                    'nam' => date('Y',time()),
+                    'month' => date('m',time()),
+                    'year' => date('Y',time()),
                     'product_id' => $value
                 ));
             $wh->product_id =  $value;
-            $wh->tondau =  $warehouse->tondau;
-            $wh->tongnhap = $warehouse->tongnhap;
-            $wh->tongxuat = $warehouse->tongxuat;
-            $wh->toncuoi =  $warehouse->toncuoi;
+            $wh->begin_inventory =  $warehouse->begin_inventory;
+            $wh->sum_import = $warehouse->sum_import;
+            $wh->sum_export = $warehouse->sum_export;
+            $wh->end_inventory =  $warehouse->end_inventory;
             $wh->save();
             // dd($warehouse);
         }
@@ -256,7 +256,7 @@ class BillImportController extends Controller
         $provider = new Provider();
         $provider->name = $request->name;
         $provider->email = $request->email;
-        $provider->sdt = $request->sdt;
+        $provider->phone = $request->phone;
         $provider->andress = $request->andress;
         if($provider->save()){
             return response()->json($provider);

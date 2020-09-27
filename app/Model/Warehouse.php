@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Warehouse extends Model
 {
-    protected $fillable =  ['thang','nam','tondau','toncuoi','tongnhap','tongxuat'];
+    protected $fillable =  ['month','year','begin_inventory','end_inventory','sum_import','sum_export'];
 
     public function product()
     {
