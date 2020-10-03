@@ -70,24 +70,16 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-4 box-border">
                     <div class="form-group">
-                        <label for="fname" class=" control-label col-form-label">Loại danh mục (*)</label>
-                        <select required name="categoryType" class="select2 form-control custom-select" style="width: 100%; height:auto;">
-                            <option value="">----Chọn loại danh mục----</option>
+                        <label for="fname" class=" control-label col-form-label">Danh mục (*)</label>
+                        <select required name="category" class="select2 form-control custom-select" style="width: 100%; height:auto;">
+                            <option value="">----Chọn danh mục----</option>
                             @if (isset($action))
-                                @foreach ($categoryType as $ct)
-                                    <optgroup label="{{$ct->name}}">
-                                        @foreach ($ct->categoryType as $item)
-                                            <option  {{($item->id == $product->category_type_id) ? "selected" : ""}} value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                    </optgroup>
+                                @foreach ($category as $item)
+                                    <option  {{($item->id == $product->category_id) ? "selected" : ""}} value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             @else
-                                @foreach ($categoryType as $ct)
-                                    <optgroup label="{{$ct->name}}">
-                                        @foreach ($ct->categoryType as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                    </optgroup>
+                                @foreach ($category as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             @endif
 
@@ -103,6 +95,21 @@
                                 @endforeach
                             @else
                                 @foreach ($producers as $item)
+                                    <option value="{{$item->id}}">{{$item->name}} ({{$item->code}})</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fname" class=" control-label col-form-label">Nhà cung cấp (*)</label>
+                        <select required name="provider" class="select2 form-control custom-select" style="width: 100%; height:auto;">
+                            <option value="">----Chọn nhà cung cấp----</option>
+                            @if (isset($action))
+                                @foreach ($providers as $item)
+                                    <option {{($item->id == $product->provider_id) ? "selected" : ""}} value="{{$item->id}}">{{$item->name}} ({{$item->code}})</option>
+                                @endforeach
+                            @else
+                                @foreach ($providers as $item)
                                     <option value="{{$item->id}}">{{$item->name}} ({{$item->code}})</option>
                                 @endforeach
                             @endif

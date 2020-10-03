@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use App\Model\Category;
-use App\Model\CategoryType;
 use App\Model\Product;
 use App\Model\Album;
 use App\Model\ProductClassification;
@@ -22,14 +21,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $categoryType = CategoryType::all();
-        $arrCategoryType = [];
-        foreach ($categoryType as $key => $value) {
-            $arrCategoryType[$value->id] = $value->name;
-        }
+        $category = Category::all();
+        $arrCategory = [];
+        foreach ($category as $key => $value) {
+            $arrCategory[$value->id] = $value->name;
+         }
         $data['listProduct'] = Product::latest()->paginate(20);
         // dd($data['listProduct']);
-        $data['arrCategoryType'] = $arrCategoryType;
+        $data['category'] = $category;
+        $data['arrCategory'] = $arrCategory;
         return View('admin/product', $data);
     }
 
@@ -42,14 +42,12 @@ class ProductController extends Controller
     {
         $classifies = DB::table('classifies')->get();
 
-        $categoryType = Category::with(['categoryType' => function ($ct)
-        {
-           $ct->where('active',1);
-        }])->where('active',1)->get();
+        $category = Category::where('active',1)->get();
         // dd(stringcode(13,2));
         $data['classifies'] = $classifies;
-        $data['categoryType'] = $categoryType;
+        $data['category'] = $category;
         $data['producers'] = DB::table('producers')->get();
+        $data['providers'] = DB::table('providers')->get();
         return View('admin/create_product', $data);
     }
 
@@ -68,8 +66,9 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->price = $request->price;
         $product->description = $request->description;
-        $product->category_type_id = $request->categoryType;
+        $product->category_id = $request->category;
         $product->producer_id = $request->producer;
+        $product->provider_id = $request->provider;
 
         // $product->album = $request->album;
         if($request->active != 1){
@@ -106,7 +105,7 @@ class ProductController extends Controller
                 $arrclassifies->save();
             }
         }
-        return redirect()->route('product/'.$nextId.'/edit')->with('success',"Thêm thành công");
+        return redirect()->route('admin/product/'.$nextId.'/edit')->with('success',"Thêm thành công");
     }
 
     /**
@@ -137,14 +136,12 @@ class ProductController extends Controller
         }
         $classifies = DB::table('classifies')->get();
         // dd($arrclassifies);
-        $categoryType = Category::with(['categoryType' => function ($ct)
-        {
-           $ct->where('active',1);
-        }])->where('active',1)->get();
+        $category = Category::where('active',1)->get();
         // dd(count($arralbum));
         $data['classifies'] = $classifies;
-        $data['categoryType'] = $categoryType;
+        $data['category'] = $category;
         $data['producers'] = DB::table('producers')->get();
+        $data['providers'] = DB::table('providers')->get();
         $data['product'] = $product;
         $data['arralbum'] = $arralbum;
         $data['arrclassifies'] = $arr;
@@ -165,8 +162,9 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->price = $request->price;
         $product->description = $request->description;
-        $product->category_type_id = $request->categoryType;
+        $product->category_id = $request->category;
         $product->producer_id = $request->producer;
+        $product->provider_id = $request->provider;
         if($request->active != 1){
             $product->active = 0;
         }else{
@@ -227,13 +225,10 @@ class ProductController extends Controller
 
         $classifies = DB::table('classifies')->get();
 
-        $categoryType = Category::with(['categoryType' => function ($ct)
-        {
-           $ct->where('active',1);
-        }])->where('active',1)->get();
+        $category = Category::where('active',1)->get();
         // dd(stringcode(13,2));
         $data['classifies'] = $classifies;
-        $data['categoryType'] = $categoryType;
+        $data['category'] = $category;
         $data['producers'] = DB::table('producers')->get();
         return data;
     }

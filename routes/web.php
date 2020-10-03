@@ -17,9 +17,7 @@ Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('wellcome','admin\WellcomeController@index')->name('wellcome');
-    Route::resource('categoryGroup', 'admin\CategoryGroupController');
     Route::resource('category', 'admin\CategoryController');
-    Route::resource('categoryType', 'admin\CategoryTypeController');
     Route::resource('product', 'admin\ProductController');
     Route::resource('billImport', 'admin\BillImportController');
     Route::resource('billExport', 'admin\BillExportController');
@@ -30,7 +28,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('ajaxSaveClassify','admin\ProductController@ajaxSaveClassify');
     Route::post('ajaxSaveProvider','admin\BillImportController@ajaxSaveProvider');
     Route::post('sale/create/ajaxSanPham', 'admin\SaleController@ajaxSanPham');
-    Route::post('sale/create/ajaxCategoryType', 'admin\SaleController@ajaxCategoryType');
     Route::post('sale/create/ajaxProducer', 'admin\SaleController@ajaxProducer');
     Route::post('sale/create/ajaxProvider', 'admin\SaleController@ajaxProvider');
 });

@@ -10,7 +10,7 @@
                     <div class="ml-auto text-right">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Khuyến mãi</a></li>
+                                <li class="breadcrumb-item"><a href="#">Thiết lập hệ thống</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Thêm khuyến mãi</li>
                             </ol>
                         </nav>

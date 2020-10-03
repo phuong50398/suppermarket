@@ -17,6 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 // Route::resource('danhmuc', 'HomeController');
-Route::get('category', 'CategoryGroupController@index');
+// Route::get('category', 'CategoryGroupController@index');
 Route::get('home', 'ProductController@index');
 Route::get('groupProduct/{name}/{type}', 'ProductController@GroupProduct');

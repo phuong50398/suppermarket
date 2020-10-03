@@ -26,12 +26,12 @@ class CreateProductsTable extends Migration
             $table->string('status')->nullable();
             $table->boolean('active');
             $table->text('images');
-            $table->bigInteger('category_type_id')->unsigned();
+            $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('provider_id')->unsigned();
             $table->bigInteger('producer_id')->unsigned()->nullable();
             $table->timestamps();
 
-            $table->foreign('category_type_id')->references('id')->on('category_types')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('provider_id')->references('id')->on('providers')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('producer_id')->references('id')->on('producers')->onDelete('restrict')->onUpdate('cascade');
         });

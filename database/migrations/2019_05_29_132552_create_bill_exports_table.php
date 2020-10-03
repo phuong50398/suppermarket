@@ -16,6 +16,9 @@ class CreateBillExportsTable extends Migration
         Schema::create('bill_exports', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('date_of_export');
+            $table->integer('cost')->nullable();
+            $table->string('note')->nullable();
+            $table->integer('status');
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
 

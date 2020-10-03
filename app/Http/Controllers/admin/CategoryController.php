@@ -16,17 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $listCategoryGroup = CategoryGroup::where('active',1)->get();
-        $listCategory = Category::with(['categoryType' => function($c){
-            // $c->where('active', '=', 1);
+        $listCategory = Category::with(['product' => function($c){
         }])->orderBy('id','desc')->get();
-        $arrcg = [];
-        foreach ($listCategoryGroup as $key => $value) {
-            $arrcg[$value->id] = $value->name;
-        }
-        $data['listCategoryGroup'] = $listCategoryGroup;
         $data['listCategory'] = $listCategory;
-        $data['arrcg'] = $arrcg;
         return View('admin/category', $data);
     }
 
@@ -50,7 +42,6 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->name = $request->name;
-        $category->category_group_id = $request->categoryGroup;
         if($request->active != 1){
             $category->active = 0;
         }else{
@@ -80,19 +71,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $listCategoryGroup = CategoryGroup::all();
-        $listCategory = Category::with(['categoryType' => function($c){
-            // $c->where('active', '=', 1);
-        }])->orderBy('id','desc')->get();
-        $arrcg = [];
-        foreach ($listCategoryGroup as $key => $value) {
-            $arrcg[$value->id] = $value->name;
-        }
+        $listCategory = Category::orderBy('id','desc')->get();
         $category = Category::find($id);
-
-        $data['listCategoryGroup'] = $listCategoryGroup;
         $data['listCategory'] = $listCategory;
-        $data['arrcg'] = $arrcg;
         $data['category'] = $category;
         $data['action'] = 'edit';
         return View('admin/category', $data);
@@ -109,7 +90,6 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->name = $request->name;
-        $category->category_group_id = $request->categoryGroup;
         if($request->active != 1){
             $category->active = 0;
         }else{

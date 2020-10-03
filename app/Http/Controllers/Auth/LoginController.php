@@ -35,7 +35,8 @@ class LoginController extends Controller
                 return redirect('/admin/wellcome');
             }
         
-            return redirect('/');
+            return redirect('/admin/wellcome');
+            // return redirect('/');
         }
     
 
@@ -50,12 +51,13 @@ class LoginController extends Controller
     }
     public function showLoginForm()
     {
-        $categoryGroup = CategoryGroup::with(['category' => function($cg) {
-            $cg->where('active', '=', 1)->with(['categoryType' => function($c){
-                $c->where('active', '=', 1);
-            }]);
-        }])->where('active',1)->get();
-        $data['listMenu'] = $categoryGroup;
+        // $categoryGroup = CategoryGroup::with(['category' => function($cg) {
+        //     $cg->where('active', '=', 1)->with(['categoryType' => function($c){
+        //         $c->where('active', '=', 1);
+        //     }]);
+        // }])->where('active',1)->get();
+        // $data['listMenu'] = $categoryGroup;
+        $data['listMenu'] = '';
         return view('auth.login',  $data);
     }
 }

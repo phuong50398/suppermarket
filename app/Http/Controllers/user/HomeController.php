@@ -12,13 +12,13 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categoryGroup = CategoryGroup::with(['category' => function($cg) {
-            $cg->where('active', '=', 1)->with(['categoryType' => function($c){
-                $c->where('active', '=', 1);
-            }]);
-        }])->where('active',1)->get();
+        // $categoryGroup = CategoryGroup::with(['category' => function($cg) {
+        //     $cg->where('active', '=', 1)->with(['categoryType' => function($c){
+        //         $c->where('active', '=', 1);
+        //     }]);
+        // }])->where('active',1)->get();
 
-        $data['listMenu'] = $categoryGroup;
+        // $data['listMenu'] = $categoryGroup;
         $data['hot_product'] = Product::where('active', 1)->orderBy('number_sold','DESC')->limit(8)->get();
         // $categoryGroup = CategoryGroup::with(['category' => function($cg) {
         //     $cg->where('active', '=', 1)->with(['categoryType' => function($c){

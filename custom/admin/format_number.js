@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var origin = 'http://localhost:81/suppermarket';
+    var origin = 'http://localhost/suppermarket';
     // $('.datatable').DataTable();
     // $(".select2").select2();
     changeTotal();

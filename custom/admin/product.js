@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var origin = 'http://localhost:81/suppermarket';
+    var origin = 'http://localhost/suppermarket';
 
     function readURL(input, next, i) {
         if (input.files && input.files[i]) {

@@ -6,8 +6,6 @@ use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Sale;
-use App\Model\Category;
-use App\Model\CategoryType;
 
 class SaleController extends Controller
 {
@@ -18,7 +16,9 @@ class SaleController extends Controller
      */
     public function index()
     {
-
+        $data['sale'] = Sale::latest()->paginate(20);
+        // dd($data['listProduct']);
+        return View('admin/sale', $data);
     }
 
     /**

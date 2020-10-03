@@ -20,7 +20,6 @@ class CreateProvidersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('code')->unique();
-            $table->string('slug')->unique();
             $table->text('logo')->nullable();
             $table->timestamps();
         });

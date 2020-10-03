@@ -15,7 +15,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'status' => rand('0','1'),
         'active' =>rand(1,0),
         'images' => 'uploads/k'.rand(1,12).'.jpg',
-        'category_type_id' => App\Model\CategoryType::pluck('id')->random(),
+        'category_id' => App\Model\Category::pluck('id')->random(),
         'provider_id' => App\Model\Provider::pluck('id')->random(),
         'producer_id' => App\Model\Producer::pluck('id')->random()
     ];
