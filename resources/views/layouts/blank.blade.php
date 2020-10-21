@@ -13,6 +13,7 @@
     <link href="{{url('custom/css/user.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{url('custom/css/font-awesome.css')}}" rel="stylesheet">
     <script src="{{url('custom/js/jquery-1.11.1.min.js')}}"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body>
     @section('content')

@@ -13,9 +13,9 @@
                         <div class="flexslider">
                             <ul class="slides">
                                 @foreach ($product->album as $item)
-                                    <li data-thumb="{{$item->link}}">
+                                    <li data-thumb="{{url('public/'.$item->link)}}">
                                         <div class="thumb-image">
-                                        <img src="{{$item->link}}" data-imagezoom="true"   class="img-responsive" alt=""> </div>
+                                        <img src="{{url('public/'.$item->link)}}" data-imagezoom="true"   class="img-responsive" alt=""> </div>
                                     </li>
                                 @endforeach
                             </ul>
@@ -34,14 +34,8 @@
                         <div class="starbox small ghosting"> </div>
                     </div>
                     <p class="in-pa"> {{$product->summary}}</p>
-                    <ul class="social-top">
-                        <li><a href="#" class="icon facebook"><i class="fa fa-facebook" aria-hidden="true"></i><span></span></a></li>
-                        <li><a href="#" class="icon twitter"><i class="fa fa-twitter" aria-hidden="true"></i><span></span></a></li>
-                        <li><a href="#" class="icon pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i><span></span></a></li>
-                        <li><a href="#" class="icon dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i><span></span></a></li>
-                    </ul>
                     <div class="add add-3">
-                        <button class="btn btn-danger my-cart-btn my-cart-b themgiohang" data-id="{{$product->id}}">Thêm vào giỏ hàng</button>
+                        <button  data-toggle="modal" data-target="#myModal" class="btn btn-danger my-cart-btn my-cart-b" data-id="{{$product->id}}">Thêm giỏ hàng</button>
                         <button class="btn btn-danger my-cart-btn my-cart-b muangay"  data-id="{{$product->id}}">Mua ngay</button>
                     </div>
                     <div class="clearfix"> </div>
@@ -85,7 +79,7 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="add">
-                                <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1" data-summary="summary 1" data-price="0.80" data-quantity="1" data-image="images/of23.png">Add to Cart</button>
+                                <button  data-toggle="modal" data-target="#myModal" class="btn btn-danger my-cart-btn my-cart-b" data-id="{{$item->id}}">Add to Cart</button>
                             </div>
                         </div>
                     </div>

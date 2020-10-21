@@ -88,3 +88,19 @@ li.dropdown:hover .dropdown-menu {
     border: 2px solid #fab005;
     background: #fab005;
 }
+
+.p-classify .label {
+    cursor: pointer;
+    background: rgb(91 192 222 / 0.3);
+    color: #1b242f;
+    border: 1px solid #5bc0de;
+    margin: 0px 3px;
+}
+
+.p-classify .label.active,
+.p-classify .label:hover {
+    cursor: pointer;
+    background: #5bc0de;
+    border: 1px solid #5bc0de;
+    color: white;
+}

@@ -6,42 +6,35 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Product;
 use App\Model\Category;
-use App\Model\CategoryGroup;
+use App\Model\Classify;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // $categoryGroup = CategoryGroup::with(['category' => function($cg) {
-        //     $cg->where('active', '=', 1)->with(['categoryType' => function($c){
-        //         $c->where('active', '=', 1);
-        //     }]);
-        // }])->where('active',1)->get();
+        $category = Category::where('active',1)->orderBy('id','DESC')->limit(6)->get();
 
-        // $data['listMenu'] = $categoryGroup;
-        $data['hot_product'] = Product::where('active', 1)->orderBy('number_sold','DESC')->limit(8)->get();
-        // $categoryGroup = CategoryGroup::with(['category' => function($cg) {
-        //     $cg->where('active', '=', 1)->with(['categoryType' => function($c){
-        //         $c->where('active', '=', 1);
-        //     }]);
-        // }])->where('active',1)->get();
-        $group_product = [];
-        foreach ($categoryGroup as $key => $cg) {
-            $group_product[$key]['id'] = $cg->id;
-            $group_product[$key]['name'] = $cg->name;
-            foreach ($cg->category as $kc => $c) {
-                foreach ($c->categoryType as $kct => $ct){
-                    $group_product[$key]['category_type_id'][] = $ct->id;
-                }
-            }
+        $data['listMenu'] = $category;
+        $data['new_product'] = Product::with(['productClassify' => function($c){
+        }])->where('active', 1)->orderBy('id','DESC')->limit(8)->get();
 
+        foreach ($category as $key => $value) {
+            $category[$key]['list_product'] = Product::with(['productClassify' => function($c){
+            }])->where('category_id', $value->id)->where('active',1)->limit(8)->get();
         }
-
-        foreach ($group_product as $key => $value) {
-            $group_product[$key]['list_product'] = Product::whereIn('category_type_id', $group_product[$key]['category_type_id'])->where('active',1)->limit(8)->get();
-        }
-        $data['group_product'] = $group_product;
+        $data['category'] = $category;
 
         return view('user.home', $data);
+    }
+    public function ajaxGetProduct(Request $request)
+    {
+        $product =  Product::with(['productClassify' => function($c){
+        }])->where('id', $request->id)->get()->toArray();
+        foreach ($product as $key => $value){
+            foreach ($value['product_classify'] as $k => $cf){
+                $product[$key]['product_classify'][$k]['classify'] = Classify::find($cf['classify_id'])->toArray();
+            }
+        }
+        return response()->json($product);
     }
 }

@@ -23,6 +23,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('billExport', 'admin\BillExportController');
     Route::get('warehouse', 'admin\WarehouseController@index');
     Route::resource('sale', 'admin\SaleController');
+    
+    Route::resource('producer', 'admin\ProducerController');
+    Route::resource('provider', 'admin\ProviderController');
+    Route::resource('classify', 'admin\ClassifyController');
 
     // ajax
     Route::post('ajaxSaveClassify','admin\ProductController@ajaxSaveClassify');
@@ -40,3 +44,4 @@ Route::get('category/{slug}', 'user\ListProductController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/{slug}', 'user\ProductController@index');
+Route::post('ajaxGetProduct','user\HomeController@ajaxGetProduct');

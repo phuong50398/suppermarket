@@ -8,7 +8,7 @@
     <div class="container">
         <div class="col-md-12">
             <div class="spec ">
-                <h3>{{$list_product[0]->grname}}</h3>
+                <h3>{{$curent_category[0]->name}}</h3>
                 <div class="ser-t">
                     <b></b>
                     <span><i></i></span>
@@ -35,7 +35,7 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="add">
-                                <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1" data-summary="summary 1" data-price="0.80" data-quantity="1" data-image="images/of23.png">Add to Cart</button>
+                                <button  data-toggle="modal" data-target="#myModal" class="btn btn-danger my-cart-btn my-cart-b" data-id="{{$item->id}}">Add to Cart</button>
                             </div>
                         </div>
                     </div>

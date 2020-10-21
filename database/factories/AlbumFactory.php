@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Album::class, function (Faker $faker) {
     return [
         'product_id' => App\Model\Product::pluck('id')->random(),
-        'link' => 'http://localhost/suppermarket/custom/images/k'.rand(1,12).'.jpg'
+        'link' => 'uploads/k'.rand(1,12).'.jpg',
     ];
 });

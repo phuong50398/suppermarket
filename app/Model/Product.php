@@ -22,6 +22,10 @@ class Product extends Model
     {
         return $this->hasMany(Album::class);
     }
+    public function productClassify()
+    {
+        return $this->hasMany(ProductClassification::class);
+    }
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;

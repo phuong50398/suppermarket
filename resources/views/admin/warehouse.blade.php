@@ -23,7 +23,7 @@
                 <form action="" method="get">
                     <div class="row">
                             <div class="col-md-1"></div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <div class="row">
                                     <label class=" control-label col-form-label p-l-10">Chọn tháng</label>
@@ -38,12 +38,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <div class="row">
                                     <label class=" control-label col-form-label p-l-10">Chọn năm</label>
                                     <div class="col-md-11">
-                                        <select required name="thang" class="form-control">
+                                        <select required name="nam" class="form-control">
                                             <option value="tatca">Tất cả</option>
                                             @for ($i = 2019; $i < date('Y',time())+5; $i++)
                                                 <option value="{{$i}}">{{$i}}</option>
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <div class="form-group">
                                 <div class="row">
                                     <label class=" control-label col-form-label p-l-10">Tên sản phẩm</label>
@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-2 m-auto">
                             <button type="submit" name="search" class="btn btn-primary"> <i class=" fas fa-search"></i> Tìm kiếm</button>
                         </div>

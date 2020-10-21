@@ -20,7 +20,6 @@ class CreateProductsTable extends Migration
             $table->string('barcode')->nullable();
             $table->string('slug')->unique();
             $table->integer('price');
-            $table->integer('number_sold')->nullable();
             $table->text('summary')->nullable();
             $table->text('description');
             $table->string('status')->nullable();

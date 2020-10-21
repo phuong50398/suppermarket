@@ -117,19 +117,19 @@
                                 <a class="dropdown-item" href="{{url('admin/sale')}}">Danh sách khuyến mãi</a>
                             </div>
                         </li>
-                        <!-- <li class="nav-item dropdown">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="d-none d-md-block">
+                                <span class="d-none d-md-block">
                                     <i class="far fa-file-alt"></i>
                                  Đơn hàng <i class="fa fa-angle-down"></i>
                             </span>
-                             <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
+                                <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Danh sách đơn hàng</a>
                                 <a class="dropdown-item" href="#">Quản lý giao hàng</a>
                             </div>
-                        </li> -->
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-none d-md-block">
@@ -139,11 +139,36 @@
                                 <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{url('admin/classify')}}">Phân loại sản phẩm</a>
                                 <a class="dropdown-item" href="{{url('admin/product/create')}}">Thêm sản phẩm</a>
                                 <a class="dropdown-item" href="{{url('admin/product')}}">Danh sách sản phẩm</a>
-                                <!-- <a class="dropdown-item" href="{{url('admin/warehouse')}}">Quản lý kho</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-none d-md-block">
+                                    <i class="mdi mdi-cube-outline"></i>
+                                    Quản lý kho <i class="fa fa-angle-down"></i>
+                            </span>
+                                <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{url('admin/warehouse')}}">Quản lý kho</a>
                                 <a class="dropdown-item" href="{{url('admin/billImport')}}">Nhập hàng</a>
-                                <a class="dropdown-item" href="{{url('admin/billExport')}}">Chuyển hàng</a> -->
+                                <a class="dropdown-item" href="{{url('admin/billExport')}}">Chuyển hàng</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-none d-md-block">
+                                    <i class="mdi mdi-cube-outline"></i>
+                                    Quản lý đối tác <i class="fa fa-angle-down"></i>
+                            </span>
+                                <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{url('admin/producer')}}">Nhà sản xuất</a>
+                                <a class="dropdown-item" href="{{url('admin/provider')}}">Nhà cung cấp</a>
                             </div>
                         </li>
                         <!-- <li class="nav-item dropdown">
@@ -176,14 +201,14 @@
                         <!-- ============================================================== -->
                         <!-- Comment -->
                         <!-- ============================================================== -->
-                       
+
                         <!-- ============================================================== -->
                         <!-- End Comment -->
                         <!-- ============================================================== -->
                         <!-- ============================================================== -->
                         <!-- Messages -->
                         <!-- ============================================================== -->
-                       
+
                         <!-- ============================================================== -->
                         <!-- End Messages -->
                         <!-- ============================================================== -->
@@ -191,7 +216,7 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                       <!-- <li class="nav-item dropdown">
+                        <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{url('custom/admin/assets/images/users/1.jpg')}}" alt="user" class="rounded-circle" width="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
@@ -253,19 +278,26 @@
     </script>
     @endif
     <script>
-         $('.datatable').DataTable();
-     $(".select2").select2();
-    if($('#editor1').length > 0){
-        CKEDITOR.replace('editor1',
-        {
-        filebrowserBrowseUrl: '{{ url('custom/admin/ckfinder/ckfinder.html') }}',
-        filebrowserImageBrowseUrl: '{{ url('custom/admin/ckfinder/ckfinder.html?type=Images') }}',
-        filebrowserFlashBrowseUrl: '{{ url('custom/admin/ckfinder/ckfinder.html?type=Flash') }}',
-        filebrowserUploadUrl: '{{ url('custom/admin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
-        filebrowserImageUploadUrl: '{{ url('custom/admin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
-        filebrowserFlashUploadUrl: '{{url('custom/admin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
-     });
-    }
+        $('.datatable').DataTable();
+        $(".select2").select2();
+        if ($('#editor1').length > 0) {
+            CKEDITOR.replace('editor1', {
+                filebrowserBrowseUrl: `{{ url('
+                custom / admin / ckfinder / ckfinder.html ') }}`,
+                filebrowserImageBrowseUrl: `{{ url('
+                custom / admin / ckfinder / ckfinder.html ? type = Images ') }}`,
+                filebrowserFlashBrowseUrl: `{{ url('
+                custom / admin / ckfinder / ckfinder.html ? type = Flash ') }}`,
+                filebrowserUploadUrl: `{{ url('
+                custom / admin / ckfinder / core / connector / php / connector.php ? command = QuickUpload & type = Files ') }}`,
+                filebrowserImageUploadUrl: ` {
+                            {
+                                url('
+                                    custom / admin / ckfinder / core / connector / php / connector.php ? command = QuickUpload & type = Images ') }}`,
+                filebrowserFlashUploadUrl: `{{url('
+                custom / admin / ckfinder / core / connector / php / connector.php ? command = QuickUpload & type = Flash ') }}`
+            });
+        }
     </script>
 </body>
 
