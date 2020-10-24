@@ -39,9 +39,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 Route::get('/', 'user\HomeController@index');
 Route::get('category/{slug}', 'user\ListProductController@index');
+Route::get('carts', 'user\CartController@index');
 
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'user\HomeController@index')->name('home');
 Route::get('/{slug}', 'user\ProductController@index');
 Route::post('ajaxGetProduct','user\HomeController@ajaxGetProduct');
+Route::post('ajaxAddCart','user\HomeController@ajaxAddCart');
+Route::post('ajaxCountCart','user\HomeController@ajaxCountCart');

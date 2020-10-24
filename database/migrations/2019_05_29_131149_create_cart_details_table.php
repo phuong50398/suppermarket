@@ -19,7 +19,7 @@ class CreateCartDetailsTable extends Migration
             $table->bigInteger('product_id')->unsigned();
             $table->bigInteger('product_classification_id')->unsigned();
             $table->timestamps();
-            $table->primary(array('cart_id', 'product_id'));
+            $table->primary(array('cart_id', 'product_id', 'product_classification_id'));
 
             $table->foreign('cart_id')->references('id')->on('carts')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict')->onUpdate('cascade');

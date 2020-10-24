@@ -21,7 +21,7 @@ class CreatePurchaseOrderDetailsTable extends Migration
             $table->bigInteger('product_id')->unsigned();
             $table->bigInteger('product_classification_id')->unsigned();
             $table->timestamps();
-            $table->primary(array('purchase_order_id', 'product_id'));
+            $table->primary(array('purchase_order_id', 'product_id', 'product_classification_id'));
 
             $table->foreign('purchase_order_id')->references('id')->on('purchase_orders')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict')->onUpdate('cascade');

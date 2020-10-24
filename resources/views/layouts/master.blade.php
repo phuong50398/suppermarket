@@ -77,12 +77,47 @@
             </div>
         </div>
 <!-- //footer-->
-//@if(Auth::check())
-// content 
-//@endif
+
 </body>
 <script src="{{url('custom/js/bootstrap.js')}}"></script>
 <script src="{{url('custom/js/jquery.flexslider.js')}}"></script>
 <script src="{{url('custom/js/user.js')}}"></script>
 
+@if(Auth::check())
+    <script>
+        $(document).ready(function() {
+            var cart = localStorage.getItem('cart');
+            if(cart && JSON.parse(cart).length > 0){
+                $.ajax({
+                    type: "post",
+                    url: location.origin + '/suppermarket/ajaxAddCart',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        'carts': JSON.stringify(JSON.parse(cart))
+                    },
+                    async: !1,
+                    success: function(res) {
+                        localStorage.removeItem('cart');
+                        $('.my-cart-badge').html(res.count);
+                    }
+                });
+            }else{
+                $.ajax({
+                    type: "post",
+                    url: location.origin + '/suppermarket/ajaxCountCart',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    async: !1,
+                    success: function(res) {
+                        localStorage.removeItem('cart');
+                        $('.my-cart-badge').html(res.count);
+                    }
+                });
+            }
+        });
+    </script>
+@else
+    countCart();
+@endif
 </html>

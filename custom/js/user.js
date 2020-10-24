@@ -4,7 +4,6 @@ $(document).ready(function() {
         animation: "slide",
         controlNav: "thumbnails"
     });
-    countCart();
     $('.my-cart-btn').on('click', function() {
         $.ajax({
             type: "post",
@@ -22,7 +21,7 @@ $(document).ready(function() {
                 if (res.product_classify.length > 0) {
                     var html = '';
                     res.product_classify.forEach(e => {
-                        html += `<span class="label label-info item-classify" data-classifyid='${e.classify.id}'>${e.classify.type} - ${e.classify.value}</span>`;
+                        html += `<span class="label label-info item-classify" data-classifyid='${e.id}'>${e.classify.type} - ${e.classify.value}</span>`;
 
                     });
                     $('#myModal .p-js-classify').html(`<h4 class="quick">Phân loại</h4>
@@ -38,28 +37,28 @@ $(document).ready(function() {
                 /// thêm giỏ hàng
                 $('.js-addcart').on('click', function() {
                     var id = $(this).data('id');
-                    var classify_id = 0;
-                    if ($('#myModal .item-classify').length > 0) {
-                        if ($('#myModal .item-classify.active').length == 0) {
-                            alert('Vui lòng chọn phân loại sản phẩm');
-                            return;
-                        } else {
-                            classify_id = $('#myModal .item-classify.active').data('classifyid');
-                        }
+                    var product_classify_id = 0;
+                    // if ($('#myModal .item-classify').length > 0) {
+                    if ($('#myModal .item-classify.active').length == 0) {
+                        alert('Vui lòng chọn phân loại sản phẩm');
+                        return;
+                    } else {
+                        product_classify_id = $('#myModal .item-classify.active').data('classifyid');
                     }
+                    // }
                     var cart = localStorage.getItem('cart');
                     if (cart) {
                         cart = JSON.parse(cart);
                         var item = cart.find(e => {
-                            return e.id == id && e.classify_id == classify_id;
+                            return e.id == id && e.classify_id == product_classify_id;
                         });
                         if (item) {
                             item.amount = parseInt(item.amount) + 1;
                         } else {
-                            cart.push({ id: id, classify_id: classify_id, amount: 1 })
+                            cart.push({ id: id, product_classify_id: product_classify_id, amount: 1 })
                         }
                     } else {
-                        cart = [{ id: id, classify_id: classify_id, amount: 1 }];
+                        cart = [{ id: id, product_classify_id: product_classify_id, amount: 1 }];
                     }
                     localStorage.setItem('cart', JSON.stringify(cart));
                     countCart();
