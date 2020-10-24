@@ -63,6 +63,10 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="fname" class=" control-label col-form-label">Tóm tắt (*)</label>
+                        <textarea class="form-control" name="summary" >{{(isset($action)) ? old('summary', $product->summary) : ""}}</textarea>
+                    </div>
+                    <div class="form-group">
                         <label for="fname" class=" control-label col-form-label">Mô tả (*)</label>
                         <textarea name="description" id="editor1" >{{(isset($action)) ? old('description', $product->description) : ""}}</textarea>
                     </div>

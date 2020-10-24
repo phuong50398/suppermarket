@@ -15,24 +15,6 @@
         </div>
         <script>
         $(document).ready(function(c) {
-            $('.close1').on('click', function(c) {
-                $('.cross').fadeOut('slow', function(c) {
-                    $('.cross').remove();
-                });
-            });
-        });
-        </script>
-        <script>
-        $(document).ready(function(c) {
-            $('.close2').on('click', function(c) {
-                $('.cross1').fadeOut('slow', function(c) {
-                    $('.cross1').remove();
-                });
-            });
-        });
-        </script>
-        <script>
-        $(document).ready(function(c) {
             $('.close3').on('click', function(c) {
                 $('.cross2').fadeOut('slow', function(c) {
                     $('.cross2').remove();
@@ -57,7 +39,7 @@
                         <h5>{{$item['product']->name}}</h5>
                     </div>
                     <div class="clearfix"> </div>
-                    <div class="close1"> <i class="fa fa-times" aria-hidden="true"></i></div>
+                    <div class="remove-cart"> <i class="fa fa-times" aria-hidden="true"></i></div>
                 </td>
                 <td class="t-data">{{number_format($item['product']->price)}}</td>
                 <td class="t-data">
