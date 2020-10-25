@@ -1,5 +1,58 @@
+* {
+    margin: 0
+}
+
+h3.tongtien {
+    line-height: 25px;
+    font-size: 23px;
+    color: #0f79b3;
+    font-weight: 600;
+    padding-top: 10px;
+}
+
+h4.diachi,
+.phivanchuyen {
+    line-height: 28px;
+    color: #187eb1;
+}
+
+.menu-user {
+    position: relative;
+    /* display: contents; */
+    cursor: pointer;
+}
+
+.menu-user:hover .item-menu-user {
+    display: block;
+}
+
+img {}
+
+.item-menu-user ul li {
+    list-style: none;
+    padding: 7px;
+}
+
+.item-menu-user {
+    border-radius: 4px;
+    position: absolute;
+    left: 34%;
+    top: 100%;
+    background: #eee;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: none;
+    z-index: 111;
+}
+
 #myCarousel {
     margin-bottom: 70px;
+}
+
+.mota table tr td {
+    border: 1px solid black;
+    padding: 8px;
 }
 
 li.dropdown:active .dropdown-menu {
@@ -28,8 +81,8 @@ li.dropdown:visited .dropdown-menu {
 }
 
 .container-fluid {
-    padding-left: 40px;
-    padding-right: 40px;
+    /*  padding-left: 40px;
+    padding-right: 40px;*/
 }
 
 li.dropdown:hover .dropdown-menu {
@@ -87,6 +140,202 @@ li.dropdown:hover .dropdown-menu {
 .muangay:before {
     border: 2px solid #fab005;
     background: #fab005;
+}
+
+.mid-2 p em {
+    font-style: normal;
+    color: #444444;
+    font-weight: 600;
+}
+
+.spec a:hover {
+    text-decoration: none;
+}
+
+.spec a h3:hover {
+    color: #039445;
+}
+
+.item-menu-user::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #eee;
+    /* margin: -10px 0 0 30px; */
+    top: -9%;
+    left: 26%;
+}
+
+.search-form {
+    width: 65%;
+    margin: 0 auto;
+    display: contents;
+}
+
+.search-form input[type='submit'] {
+    width: 40px;
+    height: 44px;
+    margin-left: -5px;
+    background: url(../images/can.png) no-repeat 7px 9px #07a24e;
+}
+
+.search-form input[type='submit']:hover {
+    background: url(../images/can.png) no-repeat 7px 9px #039445;
+}
+
+.fa-shopping-cart:before {
+    content: "\f07a";
+    font-size: 30px;
+}
+
+.cart {
+    float: inherit;
+    cursor: pointer;
+    margin-top: 5px;
+    width: 25%;
+}
+
+.classify {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: 1px solid #afafaf4f;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    position: relative;
+    text-align: center;
+}
+
+.classify:hover .choose {
+    display: block;
+}
+
+.classify .choose {
+    position: absolute;
+    bottom: 0px;
+    right: 2px;
+    font-size: 14px;
+    display: none;
+}
+
+.classify:hover,
+.classify-hover {
+    border: 1px solid #e8a304;
+    color: #e8a304;
+}
+
+.classify-hover .choose {
+    display: block;
+}
+
+.added-car {
+    position: fixed;
+    left: 40%;
+    top: 31%;
+    width: 280px;
+    height: 208px;
+    background: #000000a3;
+    font-size: 18px;
+    color: #ffffff;
+    padding-top: 47px;
+    z-index: 111;
+    display: none;
+}
+
+.added-car.text-center p {
+    margin-top: 10px;
+}
+
+.added-car i {
+    font-size: 66px;
+    color: #e6720b;
+}
+
+.value-minus,
+.value-plus {
+    height: 30px;
+    line-height: 18px;
+    width: 32px;
+    border: 1px solid #cacaca;
+}
+
+.value {
+    cursor: default;
+    width: 40px;
+    height: 31px;
+    padding: 3px 0px;
+    color: #777777;
+}
+
+a.at-in {
+    padding: 5px;
+    width: 100px;
+}
+
+.sed h5 {
+    margin-top: 1.5em;
+}
+
+.sed p {
+    font-size: 11px;
+}
+
+.trash {
+    background: #ca1512;
+    width: 35px;
+    height: 35px;
+    margin: auto;
+    text-align: center;
+    padding-top: 6px;
+    font-size: 16px;
+    color: white;
+    border-radius: 50%;
+    border: 1px solid #ca1512;
+    cursor: pointer;
+}
+
+.text-danger {
+    color: #d00e0a;
+}
+
+@media (max-width: 767px) {
+    .nav-top {
+        margin-bottom: 1em;
+        display: contents;
+    }
+    nav.navbar.navbar-default {
+        width: 73%;
+        display: contents;
+    }
+    .navbar-header.nav_2 {
+        display: contents;
+    }
+    .product {
+        padding-top: 0px !important;
+    }
+    .spec h3 {
+        font-size: 1.7em;
+    }
+    .ser-t span {
+        width: 36px;
+        height: 36px;
+        left: 43%;
+    }
+    .offer-img img {
+        width: 75%;
+    }
+}
+
+@media (max-width: 414px) {
+    .search-form input[type='submit'] {
+        width: 35px;
+        height: 35px;
+        background: url(../images/can.png) no-repeat 5px 5px #07a24e;
+    }
 }
 
 .p-classify .label {

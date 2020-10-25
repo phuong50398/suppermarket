@@ -15,6 +15,7 @@ class CreatePurchaseOrdersTable extends Migration
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('total');
             $table->string('delivery_address');
             $table->float('amount');
             $table->date('date');

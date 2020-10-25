@@ -28,7 +28,7 @@
                 <div class="single-right">
                     <h3>{{$product->name}}</h3>
                     <div class="pr-single">
-                    <p class="reduced "><del>{{$product->price}} đ</del>{{$product->price}} đ</p>
+                    <p class="reduced ">{{number_format($product->price)}} đ</p>
                     </div>
                     <div class="block block-w3">
                         <div class="starbox small ghosting"> </div>
@@ -46,7 +46,7 @@
         <div class="col-md-12 p-t-40">
             <h3 class="fs-21 p-b-30">MÔ TẢ SẢN PHẨM</h3>
             <div class="col-md-12 mota">
-                {{$product->description}}
+                {!! $product->description !!}
             </div>
         </div>
 
@@ -72,7 +72,7 @@
                                 <h6><a href="{{url($item->slug)}}">{{$item->name}}</a></h6>
                             </div>
                             <div class="mid-2">
-                                <p ><label>{{$item->price}} đ</label> <em class="item_price">{{$item->price}} đ</em></p>
+                                <p > <em class="item_price">{{number_format($item->price)}} đ</em></p>
                                     <div class="block">
                                     <div class="starbox small ghosting"> </div>
                                 </div>

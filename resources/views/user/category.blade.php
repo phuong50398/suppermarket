@@ -8,7 +8,7 @@
     <div class="container">
         <div class="col-md-12">
             <div class="spec ">
-                <h3>{{$curent_category[0]->name}}</h3>
+                <h3>{{(!empty($namecg) && isset($namecg['name'])) ?  $namecg['name']   : "Kết quả tìm kiếm"}}</h3>
                 <div class="ser-t">
                     <b></b>
                     <span><i></i></span>
@@ -28,7 +28,7 @@
                                 <h6><a href="{{url($item->slug)}}">{{$item->name}}</a></h6>
                             </div>
                             <div class="mid-2">
-                                <p ><label>{{$item->price}} đ</label> <em class="item_price">{{$item->price}} đ</em></p>
+                                <p ><em class="item_price">{{number_format($item->price)}} đ</em></p>
                                     <div class="block">
                                     <div class="starbox small ghosting"> </div>
                                 </div>
