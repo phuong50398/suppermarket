@@ -1,5 +1,5 @@
 $(function() {
-    var localtion = 'http://localhost/market/';
+    var localtion = 'http://localhost/suppermarket/';
     switchClick();
     selectspChange();
     allCheck();

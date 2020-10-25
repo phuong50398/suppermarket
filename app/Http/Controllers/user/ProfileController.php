@@ -17,6 +17,7 @@ class ProfileController extends Controller
 
         $data['listMenu'] = $category;
         $data['category'] = $category;
+        $data['address'] = json_decode(Auth::user()->address);
         $data['city'] = Address::city();
         $data['district'] = Address::district();
         $data['town'] = Address::town();

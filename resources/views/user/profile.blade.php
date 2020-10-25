@@ -38,15 +38,15 @@
                     <select name="tinh" class="form-control select2"  required>
                         <option value="">-----Chọn tỉnh-----</option>
                         @foreach ($city as $item1)
-                            <option value="{{$item1->id}}" {{json_decode(Auth::user()->address)->tinh == $item1->id ? 'selected' : ''}}>{{$item1->name_city}}</option>
+                            <option value="{{$item1->id}}" {{$address != null ? ($address->tinh == $item1->id ? 'selected' : '') : ''}}>{{$item1->name_city}}</option>
                         @endforeach
                     </select>
                     <label>Quận/Huyện</label>
                     <select name="huyen" class="form-control select2" required>
                         <option value="">-----Chọn quận/huyện-----</option>
                         @foreach ($district as $item)
-                            @if ($item->city_id == json_decode(Auth::user()->address)->tinh)
-                                <option value="{{$item->id}}" {{json_decode(Auth::user()->address)->huyen == $item->id ? 'selected' : ''}}>{{$item->name_district}}</option>
+                            @if ($address != '' && $item->city_id == $address->tinh)
+                                <option value="{{$item->id}}" {{$address != null ? ($address->huyen == $item->id ? 'selected' : '') : ''}}>{{$item->name_district}}</option>
                             @endif
                         @endforeach
                     </select>
@@ -54,13 +54,13 @@
                     <select name="xa" class="form-control select2"  required>
                         <option value="">-----Chọn phường/xã-----</option>
                         @foreach ($town as $item)
-                            @if ($item->district_id == json_decode(Auth::user()->address)->huyen)
-                                <option value="{{$item->id}}" {{json_decode(Auth::user()->address)->xa == $item->id ? 'selected' : ''}}>{{$item->name_town}}</option>
+                            @if ($address!='' && $item->district_id == $address->huyen)
+                                <option value="{{$item->id}}" {{$address != null ? ($address->xa == $item1->id ? 'selected' : '') : ''}}>{{$item->name_town}}</option>
                             @endif
                         @endforeach
                     </select>
                     <label>Số nhà, Thôn, Xóm</label>
-                    <input type="text" name="diachi" class="form-control"  value="{{json_decode(Auth::user()->address)->diachi}}" required>
+                    <input type="text" name="diachi" class="form-control"  value="{{$address != '' ? $address->diachi : ''}}" required>
                 </div>
                 <div class="col-md-2 text-center m-a">
                     <div class="col-xs-12">

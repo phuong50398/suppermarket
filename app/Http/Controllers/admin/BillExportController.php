@@ -175,7 +175,10 @@ class BillExportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $billExport = BillExport::find($id);
+        BillExportDetail::where('bill_export_id',$id)->delete();
+        $billExport->delete();
+        return redirect()->route('billExport.index')->with('success',"Xóa đơn xuất hàng thành công");    
     }
     public function updateWarehouse($arrIdProduct)
     {
@@ -192,7 +195,7 @@ class BillExportController extends Controller
                 $warehouse->begin_inventory = 0;
             }else{
                 $productWarehouse = $productWarehouse[0];
-                if($productWarehouse->month==date('m',time()) && $productWarehouse->nam==date('Y',time())){
+                if($productWarehouse->month==date('m',time()) && $productWarehouse->year==date('Y',time())){
                     $warehouse->begin_inventory = $productWarehouse->begin_inventory;
                 }else{
                     $warehouse->begin_inventory = $productWarehouse->end_inventory;

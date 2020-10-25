@@ -18,6 +18,7 @@ class CreateBillExportsTable extends Migration
             $table->dateTime('date_of_export');
             $table->integer('cost')->nullable();
             $table->string('note')->nullable();
+            $table->integer('payments');
             $table->integer('status');
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
