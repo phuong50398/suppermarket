@@ -3,7 +3,8 @@
 @section('content')
 @include('shared.menu')
 @include('shared.carousel')
-<div class="check-out">
+<link href="{{url('custom/flat/orange.css')}}" rel="stylesheet">
+<div class="check-out p-t-20">
     <div class="container">
         <div class="spec ">
             <h3>Giỏ hàng</h3>
@@ -13,6 +14,24 @@
                 <b class="line"></b>
             </div>
         </div>
+        {{-- <script>
+        $(document).ready(function(c) {
+            $('.close1').on('click', function(c) {
+                $('.cross').fadeOut('slow', function(c) {
+                    $('.cross').remove();
+                });
+            });
+        });
+        </script>
+        <script>
+        $(document).ready(function(c) {
+            $('.close2').on('click', function(c) {
+                $('.cross1').fadeOut('slow', function(c) {
+                    $('.cross1').remove();
+                });
+            });
+        });
+        </script>
         <script>
         $(document).ready(function(c) {
             $('.close3').on('click', function(c) {
@@ -21,43 +40,55 @@
                 });
             });
         });
-        </script>
-        <table class="table ">
-            <tr>
-                <th class="t-head head-it ">Sản phẩm</th>
-                <th class="t-head">Giá</th>
-                <th class="t-head">Số lượng</th>
-                <th class="t-head">Thành tiền</th>
-            </tr>
-            @foreach ($mycart['cart_detail'] as $item)
-            <tr class="cross">
-                <td class="ring-in t-data">
-                    <a href="{{url($item['product']->slug)}}" class="at-in">
-                        <img width='100px' src="{{url('public/'.$item['product']->images)}}" class="img-responsive" alt="">
-                    </a>
-                    <div class="sed">
-                        <h5>{{$item['product']->name}}</h5>
-                    </div>
-                    <div class="clearfix"> </div>
-                    <div class="remove-cart"> <i class="fa fa-times" aria-hidden="true"></i></div>
-                </td>
-                <td class="t-data">{{number_format($item['product']->price)}}</td>
-                <td class="t-data">
-                    <div class="quantity">
-                        <div class="quantity-select">
-                            <div class="entry value-minus">&nbsp;</div>
-                            <div class="entry value"><span class="span-1">{{$item['amount']}}</span></div>
-                            <div class="entry value-plus active">&nbsp;</div>
-                        </div>
-                    </div>
-                </td>
-                <td class="t-data">{{number_format($item['product']->price*$item['amount'])}} đ</td>
-            </tr>
-            @endforeach
-        </table>
-        <center>
-        <button class=" add-1">Đặt hàng</button>
-        </center>
+        </script> --}}
+        <form action="{{route('buynow.store')}}" method="post">
+            @csrf
+            <table class="table table-cart">                
+            </table>
+            <div class="col-md-12 hidden-fee">
+                <div class="col-md-8">
+                    <h4 class="diachi">
+                        {{--  Địa chỉ: {{Auth::user()->diachi}} <br> {{$town ? $town->name_town : ''}} - {{$district ? $district->name_district : ''}} - {{$city ? $city->name_city : ''}} <br>  --}}
+                        Số điện thoại: {{Auth::user()->phone}}
+                    </h4>
+                </div>
+                <div class="col-md-4">
+                    @if (!empty(json_decode(Auth::user()->address)->diachi) && !empty(json_decode(Auth::user()->address)->tinh))
+                        @if (json_decode(Auth::user()->address)->tinh=='1')
+                            <h4 class="phivanchuyen" data-fee="20000">Phí vận chuyển: 20,000 đ</h4>
+                        @else
+                            <h4 class="phivanchuyen" data-fee="30000">Phí vận chuyển: 30,000 đ</h4>
+                        @endif
+                    @else
+                        <h4 class="phivanchuyen hidden" data-fee="0">Phí vận chuyển: 0 đ</h4>
+                    @endif
+                    <h4 class="phivanchuyen tong" style="font-size: font-size: 20px;">
+                        {{-- Giảm giá:  --}}
+                    </h4>
+                    <h5 class="phivanchuyen giamgia" style="font-size: font-size: 15px;">
+                        {{-- Giảm giá:  --}}
+                    </h5>
+                    <h3 class="tongtien">
+                    </h3>
+                </div>
+            </div>
+            <div class="col-md-12 text-center m-t-20  hidden-fee">
+                @if (!empty(json_decode(Auth::user()->address)->diachi) && !empty(json_decode(Auth::user()->address)->tinh) && !empty(Auth::user()->phone))
+                    <button type="submit" class="btn btn-danger btn-lg" style="border-radius: 0;">Đặt hàng ngay</button>
+                @else
+                    <h4 class="text-danger">Vui lòng cập nhật thông tin để Đặt hàng 
+                        <a href="{{url('profile')}}"><button type="button" class="btn btn-warning" style="border-radius: 0;">Cập nhật thông tin <i class="fa fa-long-arrow-right" aria-hidden="true"></i></button></a>
+                    </h4>
+                @endif
+            </div>
+        </form>
     </div>
 </div>
+<script src="{{url('custom/icheck.js')}}"></script>
+<script src="{{url('custom/js/cart.js')}}"></script>
+<style>
+    .hidden-fee{
+        display: none;
+    }
+</style>
 @endsection

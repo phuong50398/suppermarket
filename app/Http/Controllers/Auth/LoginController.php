@@ -31,6 +31,9 @@ class LoginController extends Controller
         // protected $redirectTo = '/home';
         protected function authenticated(Request $request, $user)
         {
+            if($request->query('cart')){
+                return redirect()->route('carts');
+            }
             if($user->level==1){
                 return redirect('/admin/wellcome');
             }

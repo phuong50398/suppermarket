@@ -18,4 +18,157 @@ if (! function_exists('stringcode')) {
         }
     }
 }
+if (! function_exists('checkSale')){
+    function checkSale($listProduct, $listSale, $type=NULL)
+    {
+        $arrProduct = [];
+        if($type==1){
+            foreach ($listProduct as $key => $value) {
+                $arrProduct[$value['product_id']] = $value;
+                $arrProduct[$value['product_id']]['price'] = $value['product']['price'];
+            }
+        }else{
+            foreach ($listProduct as $key => $value) {
+                $arrProduct[$value['id']] = $value;
+            }
+        }
+        // dd($listSale);
+        
+        foreach ($listSale as $ksale => $sale) {
+            switch ($sale->type) {
+                case '2':
+                    if($sale->sale_all == 'all'){
+                        foreach ($arrProduct as $id => $product) {
+                            if(isset($arrProduct[$id]['price_sale'])){
+                                $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price_sale'] - $sale->discount : $arrProduct[$id]['price_sale'] - ($arrProduct[$id]['price_sale']*$sale->discount)/100;
+                                $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                $arrProduct[$id]['list_sale'] = $sale->id;
+                            }else{
+                                $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price'] - $sale->discount : $arrProduct[$id]['price'] - ($arrProduct[$id]['price']*$sale->discount)/100;
+                                $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                $arrProduct[$id]['list_sale'] = $sale->id;
+                            }
+                        }
+                    }else{
+                        foreach($sale->saleProduct as $kpr => $product){
+                            if(isset($arrProduct[$product['product_id']])){
+                                if(isset($arrProduct[$product['product_id']]['price_sale'])){
+                                    $arrProduct[$product['product_id']]['price_sale'] = ($product->unit =='dong') ? $arrProduct[$product['product_id']]['price_sale'] - $product->discount : $arrProduct[$product['product_id']]['price_sale'] - ($arrProduct[$product['product_id']]['price_sale']*$product->discount)/100;
+                                    $arrProduct[$product['product_id']]['price_sale'] = ($arrProduct[$product['product_id']]['price_sale']<0) ? '0' : $arrProduct[$product['product_id']]['price_sale'];
+                                    $arrProduct[$product['product_id']]['list_sale'] = $sale->id;
+                                }else{
+                                    $arrProduct[$product['product_id']]['price_sale'] = ($product->unit =='dong') ? $arrProduct[$product['product_id']]['price'] - $product->discount : $arrProduct[$product['product_id']]['price'] - ($arrProduct[$product['product_id']]['price']*$product->discount)/100;
+                                    $arrProduct[$product['product_id']]['price_sale'] = ($arrProduct[$product['product_id']]['price_sale']<0) ? '0' : $arrProduct[$product['product_id']]['price_sale'];
+                                    $arrProduct[$product['product_id']]['list_sale'] = $sale->id;
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                case '3':
+                    if($sale->sale_all == 'all'){
+                        foreach ($arrProduct as $id => $product) {
+                            if(isset($arrProduct[$id]['price_sale'])){
+                                $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price_sale'] - $sale->discount : $arrProduct[$id]['price_sale'] - ($arrProduct[$id]['price_sale']*$sale->discount)/100;
+                                $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                $arrProduct[$id]['list_sale'] = $sale->id;
+                            }else{
+                                $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price'] - $sale->discount : $arrProduct[$id]['price'] - ($arrProduct[$id]['price']*$sale->discount)/100;
+                                $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                $arrProduct[$id]['list_sale'] = $sale->id;
+                            }
+                        }
+                    }else{
+                        foreach ($sale->saleProduct as  $category) {
+                            foreach ($arrProduct as $id => $product) {
+                                if($category->category_type_id == $product->category_type_id){
+                                    if(isset($arrProduct[$id]['price_sale'])){
+                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price_sale'] - $sale->discount : $arrProduct[$id]['price_sale'] - ($arrProduct[$id]['price_sale']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                        $arrProduct[$id]['list_sale'] = $sale->id;
+                                    }else{
+                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price'] - $sale->discount : $arrProduct[$id]['price'] - ($arrProduct[$id]['price']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                        $arrProduct[$id]['list_sale'] = $sale->id;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                case '4':
+                    if($sale->sale_all == 'all'){
+                        foreach ($arrProduct as $id => $product) {
+                            if(isset($arrProduct[$id]['price_sale'])){
+                                $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price_sale'] - $sale->discount : $arrProduct[$id]['price_sale'] - ($arrProduct[$id]['price_sale']*$sale->discount)/100;
+                                $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                $arrProduct[$id]['list_sale'] = $sale->id;
+                            }else{
+                                $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price'] - $sale->discount : $arrProduct[$id]['price'] - ($arrProduct[$id]['price']*$sale->discount)/100;
+                                $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                $arrProduct[$id]['list_sale'] = $sale->id;
+                            }
+                        }
+                    }else{
+                        foreach ($sale->saleProduct as  $producer) {
+                            foreach ($arrProduct as $id => $product) {
+                                if($producer->producer_id == $product->producer_id){
+                                    if(isset($arrProduct[$id]['price_sale'])){
+                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price_sale'] - $sale->discount : ($arrProduct[$id]['price_sale']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                        $arrProduct[$id]['list_sale'] = $sale->id;
+                                    }else{
+                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price'] - $sale->discount : ($arrProduct[$id]['price']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                        $arrProduct[$id]['list_sale'] = $sale->id;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                case '5':
+                    if($sale->sale_all == 'all'){
+                        foreach ($arrProduct as $id => $product) {
+                            if(isset($arrProduct[$id]['price_sale'])){
+                                $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price_sale'] - $sale->discount : $arrProduct[$id]['price_sale'] - ($arrProduct[$id]['price_sale']*$sale->discount)/100;
+                                $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                $arrProduct[$id]['list_sale'] = $sale->id;
+                            }else{
+                                $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price'] - $sale->discount : $arrProduct[$id]['price'] - ($arrProduct[$id]['price']*$sale->discount)/100;
+                                $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                $arrProduct[$id]['list_sale'] = $sale->id;
+                            }
+                        }
+                    }else{
+                        foreach ($sale->saleProduct as  $provider) {
+                            foreach ($arrProduct as $id => $product) {
+                                if($provider->provider_id == $product->provider_id){
+                                    if(isset($arrProduct[$id]['price_sale'])){
+                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price_sale'] - $sale->discount : $arrProduct[$id]['price_sale'] - ($arrProduct[$id]['price_sale']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                        $arrProduct[$id]['list_sale'] = $sale->id;
+                                    }else{
+                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price'] - $sale->discount : $arrProduct[$id]['price'] - ($arrProduct[$id]['price']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
+                                        $arrProduct[$id]['list_sale'] = $sale->id;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+            
+                default:
+                    # code...
+                    break;
+            }
+        }
+        return $arrProduct;
+    }
+}
 ?>

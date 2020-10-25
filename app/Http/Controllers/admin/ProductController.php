@@ -10,6 +10,8 @@ use App\Model\Product;
 use App\Model\Album;
 use App\Model\ProductClassification;
 use App\Model\Classify;
+use App\Model\CartDetail;
+use App\Model\PurchaseOrderDetail;
 use Validator;
 
 class ProductController extends Controller
@@ -106,7 +108,7 @@ class ProductController extends Controller
                 $arrclassifies->save();
             }
         }
-        return redirect()->route('admin/product/'.$nextId.'/edit')->with('success',"Thêm thành công");
+        return redirect()->route('product.edit',$nextId)->with('success',"Thêm thành công");
     }
 
     /**
@@ -199,14 +201,19 @@ class ProductController extends Controller
         }
 
         if($request->classifies != null){
-            $arrclassifies = ProductClassification::where('product_id', $id);
-            $arrclassifies->delete();
+            // dd($request->classifies);
+            // $arrclassifies = ProductClassification::where('product_id', $id);
+            // $arrclassifies->delete();
 
             foreach ($request->classifies as $classify){
-                $arrclassifies = new ProductClassification();
-                $arrclassifies->classify_id = $classify;
-                $arrclassifies->product_id = $id;
-                $arrclassifies->save();
+                $check_order = ProductClassification::where('classify_id', $classify)->get();
+                if(empty($check_order->toArray())){
+                    $arrclassifies = new ProductClassification();
+                    $arrclassifies->classify_id = $classify;
+                    $arrclassifies->product_id = $id;
+                    $arrclassifies->save();
+                }
+                
             }
         }
         return redirect()->route('product.edit',$id)->with('success',"Sửa thành công");

@@ -11,6 +11,7 @@
 |
 */
 Auth::routes();
+Route::get('logout', 'Auth\LoginController@logout');
 
 // /admin
 
@@ -44,7 +45,26 @@ Route::get('carts', 'user\CartController@index');
 
 
 Route::get('/home', 'user\HomeController@index')->name('home');
-Route::get('/{slug}', 'user\ProductController@index');
+Route::get('/searchProduct', 'user\HomeController@searchProduct')->name('searchProduct');
+
+
+Route::resource('buynow', 'user\CartController');
+Route::get('/profile', 'user\ProfileController@index')->name('profile');
+Route::resource('/profile', 'user\ProfileController');
+Route::get('/purchase', 'user\PurchaseController@index')->name('purchase');
+
+Route::post('ajaxGetCart', 'user\CartController@ajaxGetCart');
+Route::post('ajaxDeleteProduct', 'user\CartController@ajaxDeleteProduct');
+Route::post('ajaxUpdateAmount', 'user\CartController@ajaxUpdateAmount');
+
+
+Route::post('ajaxGetAndress', 'user\ProfileController@ajaxGetAndress');
+
+
 Route::post('ajaxGetProduct','user\HomeController@ajaxGetProduct');
 Route::post('ajaxAddCart','user\HomeController@ajaxAddCart');
 Route::post('ajaxCountCart','user\HomeController@ajaxCountCart');
+Route::post('ajaxRemoveProduct','user\CartController@ajaxRemoveProduct');
+Route::post('ajaxChangeAmount','user\CartController@ajaxChangeAmount');
+
+Route::get('/{slug}', 'user\ProductController@index');

@@ -1,4 +1,9 @@
 $(function() {
+    var localtion = 'http://localhost/market/';
+    switchClick();
+    selectspChange();
+    allCheck();
+    deleteClick();
     $('.method_sale').on('change', function() {
         method = $(this).val();
         $('.selectsp').html('');
@@ -194,7 +199,7 @@ $(function() {
     function getSanPham(handleData, tensp) {
         $.ajax({
             type: "post",
-            url: location.href + '/ajaxSanPham',
+            url: localtion + 'admin/sale/create/ajaxSanPham',
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content'),
                 'tensanpham': tensp
@@ -210,7 +215,7 @@ $(function() {
     function getSanPham(handleData, tensp) {
         $.ajax({
             type: "post",
-            url: location.href + '/ajaxSanPham',
+            url: localtion + 'admin/sale/create/ajaxSanPham',
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content'),
                 'tensanpham': tensp
@@ -226,7 +231,7 @@ $(function() {
     function getLoaiDanhMuc() {
         $.ajax({
             type: "post",
-            url: location.href + '/ajaxCategoryType',
+            url: localtion + 'admin/sale/create/ajaxCategoryType',
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content')
             },
@@ -261,7 +266,7 @@ $(function() {
     function getNhaSanXuat() {
         $.ajax({
             type: "post",
-            url: location.href + '/ajaxProducer',
+            url: localtion + 'admin/sale/create/ajaxProducer',
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content')
             },
@@ -291,7 +296,7 @@ $(function() {
     function getNhaCungCap() {
         $.ajax({
             type: "post",
-            url: location.href + '/ajaxProvider',
+            url: localtion + 'admin/sale/create/ajaxProvider',
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content')
             },

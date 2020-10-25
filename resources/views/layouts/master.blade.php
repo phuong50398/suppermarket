@@ -77,7 +77,10 @@
             </div>
         </div>
 <!-- //footer-->
-
+<div class="added-car text-center">
+        <img src="{{url('custom/images/icon/checked.png')}}" alt="">
+    <p>Thêm vào giỏ hàng thành công</p>  
+</div>
 </body>
 <script src="{{url('custom/js/bootstrap.js')}}"></script>
 <script src="{{url('custom/js/jquery.flexslider.js')}}"></script>

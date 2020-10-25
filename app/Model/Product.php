@@ -26,6 +26,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductClassification::class);
     }
+    public function cartDetail()
+    {
+        return $this->hasMany(CartDetail::class);
+    }
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;

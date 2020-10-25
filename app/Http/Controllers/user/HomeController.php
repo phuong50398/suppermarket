@@ -11,6 +11,8 @@ use App\Model\Classify;
 use App\Model\Cart;
 use App\Model\CartDetail;
 use App\Model\ProductClassification;
+use App\Model\Sale;
+use App\Model\SaleProduct;
 
 class HomeController extends Controller
 {
@@ -30,6 +32,44 @@ class HomeController extends Controller
 
         return view('user.home', $data);
     }
+
+    public function searchProduct()
+    {
+        $search = request()->query('search');
+
+        $namecg = array(
+            'name' => 'Kết quả tìm kiếm'
+        );
+        $listSale = Sale::with('saleProduct')
+            ->where('sale',1)
+            ->where('start_time','<=',date('Y-m-d H:i', time()))
+            ->where('end_time','>=',date('Y-m-d H:i', time()))->get();
+        $list_product = Product::where('name', 'like', '%' . $search . '%')->where('active',1)->latest()->paginate(12);
+        if(isset($namecg)){
+            $data['namecg'] = $namecg;
+        }else{
+            $data['namecg'] = [];
+        }
+        $category = Category::where('active',1)->orderBy('id','DESC')->limit(6)->get();
+        foreach ($category as $key => $value) {
+            $category[$key]['list_product'] = Product::with(['productClassify' => function($c){
+            }])->where('category_id', $value->id)->where('active',1)->limit(8)->get();
+        }
+        $data['category'] = $category;
+        
+
+        $data['listMenu'] = $category;
+        // dd($list_product);
+        // $arrProduct = checkSale($list_product, $listSale);
+        $data['listMenu'] = $category;
+        $data['list_product'] = $list_product;
+        // $data['arrProduct'] = $arrProduct;
+        $data['type'] = request()->query('item');
+        // dd($list_product);
+        return view('user.category', $data);
+
+    }
+
     public function ajaxGetProduct(Request $request)
     {
         $product =  Product::with(['productClassify' => function($c){
