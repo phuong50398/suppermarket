@@ -28,13 +28,13 @@
                     
                     <div class=" address">
                         <div class="col-md-4 fo-grid1">
-                                <p><i class="fa fa-home" aria-hidden="true"></i>12K Street , 45 Building Road Canada.</p>
+                                <p><i class="fa fa-home" aria-hidden="true"></i>Nam Định</p>
                         </div>
                         <div class="col-md-4 fo-grid1">
                                 <p><i class="fa fa-phone" aria-hidden="true"></i>+1234 758 839 , +1273 748 730</p>
                         </div>
                         <div class="col-md-4 fo-grid1">
-                            <p><a href="mailto:info@example.com"><i class="fa fa-envelope-o" aria-hidden="true"></i>info@example1.com</a></p>
+                            <p><a href="mailto:info@example.com"><i class="fa fa-envelope-o" aria-hidden="true"></i>chienhuong@gmai.com</a></p>
                         </div>
                         <div class="clearfix"></div>
 

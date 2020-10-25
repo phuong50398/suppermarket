@@ -26,8 +26,12 @@
                                 <h6><a href="{{url($item->slug)}}">{{$item->name}}</a></h6>
                             </div>
                             <div class="mid-2">
+                                @if (isset($item->price_sale))
+                                <p ><label>{{number_format($item->price)}} đ</label> <em class="item_price">{{number_format($item->price_sale)}} đ</em></p>
+                                @else
                                 <p ><em class="item_price">{{number_format($item->price)}} đ</em></p>
-                                    <div class="block">
+                                @endif
+                                <div class="block">
                                     <div class="starbox small ghosting"> </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -64,8 +68,12 @@
                                     <h6><a href="{{url($item->slug)}}">{{$item->name}}</a></h6>
                                 </div>
                                 <div class="mid-2">
-                                    <p > <em class="item_price">{{number_format($item->price)}} đ</em></p>
-                                        <div class="block">
+                                    @if (isset($item->price_sale))
+                                    <p ><label>{{number_format($item->price)}} đ</label> <em class="item_price">{{number_format($item->price_sale)}} đ</em></p>
+                                    @else
+                                    <p ><em class="item_price">{{number_format($item->price)}} đ</em></p>
+                                    @endif
+                                    <div class="block">
                                         <div class="starbox small ghosting"> </div>
                                     </div>
                                     <div class="clearfix"></div>

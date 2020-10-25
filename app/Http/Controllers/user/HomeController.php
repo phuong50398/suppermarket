@@ -18,15 +18,22 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $listSale = Sale::with('saleProduct')
+            ->where('sale',1)
+            ->where('start_time','<=',date('Y-m-d H:i', time()))
+            ->where('end_time','>=',date('Y-m-d H:i', time()))->get();
+
         $category = Category::where('active',1)->orderBy('id','DESC')->limit(6)->get();
 
         $data['listMenu'] = $category;
-        $data['new_product'] = Product::with(['productClassify' => function($c){
+        $new_product = Product::with(['productClassify' => function($c){
         }])->where('active', 1)->orderBy('id','DESC')->limit(8)->get();
+        $data['new_product'] = checkSale($new_product, $listSale);
 
         foreach ($category as $key => $value) {
-            $category[$key]['list_product'] = Product::with(['productClassify' => function($c){
+            $listProduct = Product::with(['productClassify' => function($c){
             }])->where('category_id', $value->id)->where('active',1)->limit(8)->get();
+            $category[$key]['list_product'] = checkSale($listProduct, $listSale);
         }
         $data['category'] = $category;
 
@@ -60,10 +67,10 @@ class HomeController extends Controller
 
         $data['listMenu'] = $category;
         // dd($list_product);
-        // $arrProduct = checkSale($list_product, $listSale);
+        $arrProduct = checkSale($list_product, $listSale);
         $data['listMenu'] = $category;
         $data['list_product'] = $list_product;
-        // $data['arrProduct'] = $arrProduct;
+        $data['arrProduct'] = $arrProduct;
         $data['type'] = request()->query('item');
         // dd($list_product);
         return view('user.category', $data);

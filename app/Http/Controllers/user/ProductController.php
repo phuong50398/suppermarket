@@ -6,11 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Product;
 use App\Model\Category;
+use App\Model\Sale;
+use App\Model\SaleProduct;
 
 class ProductController extends Controller
 {
     public function index(Request $request, $slug)
     {
+        $listSale = Sale::with('saleProduct')
+            ->where('sale',1)
+            ->where('start_time','<=',date('Y-m-d H:i', time()))
+            ->where('end_time','>=',date('Y-m-d H:i', time()))->get();
+
         $category = Category::where('active',1)->orderBy('id','DESC')->limit(6)->get();
 
         $product = Product::with(['album'])
@@ -23,6 +30,12 @@ class ProductController extends Controller
                                     ->limit(8)
                                     ->orderBy('id', 'DESC')
                                     ->get();
+
+        $arrProduct = checkSale($related_products, $listSale);
+        $saleProduct = checkSale($product, $listSale);
+
+        $data['product'] = $saleProduct[$product[0]->id];
+        $data['arrProduct'] = $arrProduct;
         $data['category'] = $category;
         $data['product'] = $product[0];
         $data['related_products'] = $related_products;

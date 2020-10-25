@@ -63,6 +63,12 @@ li.dropdown:visited .dropdown-menu {
     display: none;
 }
 
+td.t-data.text-center.data-price del {
+    color: #b5b5b5;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
 .submenu {
     text-align: left;
     font-size: 13px;

@@ -113,7 +113,7 @@ class CartController extends Controller
         
         $saleCart = Sale::with('saleProduct')
             ->where('sale',1)
-            ->where('type',1)
+            // ->where('type',1)
             ->where('start_time','<=',date('Y-m-d H:i', time()))
             ->where('end_time','>=',date('Y-m-d H:i', time()))->get();
         if(Auth::user()){
@@ -134,12 +134,12 @@ class CartController extends Controller
             foreach ($listClassify as $key => $value) {
                 $arrClassify[$value->product_classification_id] = $value->type.' '.$value->value;
             }
-            // dd($listClassify);
             $product = Product::whereIn('id', $arrIdProduct)->with(['cartDetail'])->get();
             $saleProduct = checkSale($product, $listSale);
             $result['arrClassify'] = $arrClassify;
             $result['saleProduct'] = $saleProduct;
             $result['saleCart'] = $saleCart;
+            // dd($saleProduct);
             return json_encode($result);
         }else{
 

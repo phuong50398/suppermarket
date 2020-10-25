@@ -7,11 +7,18 @@ use App\Http\Controllers\Controller;
 use App\Model\Product;
 use App\Model\Category;
 use App\Model\CategoryGroup;
+use App\Model\Sale;
+use App\Model\SaleProduct;
 
 class ListProductController extends Controller
 {
     public function index($name)
     {
+        $listSale = Sale::with('saleProduct')
+            ->where('sale',1)
+            ->where('start_time','<=',date('Y-m-d H:i', time()))
+            ->where('end_time','>=',date('Y-m-d H:i', time()))->get();
+
         $type = request()->query('item');
         // dd($type);
    
@@ -27,7 +34,9 @@ class ListProductController extends Controller
         }else{
             $data['namecg'] = [];
         }
+        $arrProduct = checkSale($list_product, $listSale);
         $data['category'] = $category;
+        $data['arrProduct'] = $arrProduct;
         $data['list_product'] = $list_product;
         $data['type'] = request()->query('item');
         return view('user.category', $data);

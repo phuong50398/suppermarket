@@ -6,13 +6,13 @@
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-        <a href="care.html"><img class="first-slide" src="{{url('custom/images/ba2.jpg')}}" alt="First slide"></a>
+        <a href=""><img class="first-slide" src="{{url('custom/images/ba2.jpg')}}" alt="First slide"></a>
         </div>
         <div class="item">
-        <a href="care.html"><img class="second-slide " src="{{url('custom/images/ba.jpg')}}" alt="Second slide"></a>
+        <a href=""><img class="second-slide " src="{{url('custom/images/ba.jpg')}}" alt="Second slide"></a>
         </div>
         <div class="item">
-        <a href="hold.html"> <img class="third-slide " src="{{url('custom/images/ba1.jpg')}}" alt="Third slide"></a>
+        <a href=""> <img class="third-slide " src="{{url('custom/images/ba1.jpg')}}" alt="Third slide"></a>
         </div>
     </div>
 </div>

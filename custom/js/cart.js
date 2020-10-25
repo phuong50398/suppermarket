@@ -12,7 +12,7 @@ $(document).ready(function() {
         // arrCart = JSON.parse(localStorage.getItem("mycart"));
         // timeUpdate = JSON.parse(localStorage.getItem("timeUpdate"));
         // if (parseInt(timeUpdate) + parseInt(expirationDuration) < parseInt(new Date().getTime())) {
-           
+
         // } 
         arrCart = [];
         $.ajax({
@@ -44,9 +44,9 @@ $(document).ready(function() {
                         html += '<div class="sed"><a href="' + url + product['slug'] + '"><h5>' + product['name'] + '</h5></a></div><span class="label label-info item-classify" >' + (product['cart_detail'][0]['product_classification_id'] != null) ? arrClassify[product['cart_detail'][0]['product_classification_id']] : '' + '</span></td>';
                         if (product['price_sale']) {
                             price = product['price_sale'];
-                            html += '<td class="t-data text-center">' + (product['price_sale'] + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' đ</td>';
+                            html += '<td class="t-data text-center data-price"><del>' + (product['price'] + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' đ</del>' + (product['price_sale'] + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' đ</td>';
                         } else {
-                            html += '<td class="t-data text-center">' + (product['price'] + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' đ</td>';
+                            html += '<td class="t-data text-center data-price">' + (product['price'] + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' đ</td>';
                         }
                         html += '<td class="t-data text-center"><div class=""> <div class="quantity-select"><div class="entry value-minus" data-price="' + price + '" data-product="' + product['id'] + '" data-product_classification="' + product['cart_detail'][0]['product_classification_id'] + '">&nbsp;</div> <div class="entry value" data-price="' + price + '">' + product['cart_detail'][0]['amount'] + '</div> <div class="entry value-plus active" data-price="' + price + '" data-product="' + product['id'] + '" data-product_classification="' + product['cart_detail'][0]['product_classification_id'] + '">&nbsp;</div> </div> </div></td>';
                         html += '<td class="t-data "> <div class="trash" title="Xóa" data-product="' + product['id'] + '"> <i class="fa fa-trash-o" aria-hidden="true"></i></div></td></tr>';
@@ -67,7 +67,7 @@ $(document).ready(function() {
                                 }
                             }
                         });
-                        $('.giamgia').html('Giảm giá: - ' + (parseInt(tonggiam) + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' đ');
+                        // $('.giamgia').html('Giảm giá: - ' + (parseInt(tonggiam) + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' đ');
                         tongtien -= parseInt(tonggiam);
                     }
                     tongtien += parseInt($('.phivanchuyen').attr('data-fee'));
@@ -91,12 +91,12 @@ $(document).ready(function() {
         $(document).on('click', '.value-plus, .value-minus', function() {
             thiss = $(this);
             var amount = parseInt(thiss.parents("tr.cross").find('.quantity-select .value').html());
-            if(thiss.hasClass('value-plus') && amount >= 0){
-                amount = amount+1;
+            if (thiss.hasClass('value-plus') && amount >= 0) {
+                amount = amount + 1;
                 thiss.parents("tr.cross").find('.quantity-select .value').html(amount);
             }
-            if(thiss.hasClass('value-minus') && amount > 1){
-                amount = amount-1;
+            if (thiss.hasClass('value-minus') && amount > 1) {
+                amount = amount - 1;
                 thiss.parents("tr.cross").find('.quantity-select .value').html(amount);
             }
             $.ajax({
@@ -176,13 +176,13 @@ $(document).ready(function() {
                         }
                     }
                 });
-                $('.giamgia').html('Giảm giá: - ' + (parseInt(tonggiam) + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' đ');
+                // $('.giamgia').html('Giảm giá: - ' + (parseInt(tonggiam) + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' đ');
                 sum -= parseInt(tonggiam);
             }
             sum += parseInt($('.phivanchuyen').attr('data-fee'));
         } else {
             $('.tong').html('Tổng tiền hàng: 0 đ');
-            $('.giamgia').html('Giảm giá: - 0 đ');
+            // $('.giamgia').html('Giảm giá: - 0 đ');
         }
         $('.tongtien').html("Thanh toán: " + (sum + "").replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' đ');
     }

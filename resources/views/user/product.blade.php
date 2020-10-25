@@ -28,7 +28,11 @@
                 <div class="single-right">
                     <h3>{{$product->name}}</h3>
                     <div class="pr-single">
-                    <p class="reduced ">{{number_format($product->price)}} đ</p>
+                        @if (isset($product->price_sale))
+                        <p class="reduced "><del>{{number_format($product->price)}} đ</del>{{number_format($product->price_sale)}} đ</p>
+                        @else
+                        <p class="reduced ">{{number_format($product->price)}} đ</p>
+                        @endif
                     </div>
                     <div class="block block-w3">
                         <div class="starbox small ghosting"> </div>
@@ -72,7 +76,11 @@
                                 <h6><a href="{{url($item->slug)}}">{{$item->name}}</a></h6>
                             </div>
                             <div class="mid-2">
-                                <p > <em class="item_price">{{number_format($item->price)}} đ</em></p>
+                                @if (isset($item->price_sale))
+                                <p ><label>{{number_format($item->price)}} đ</label> <em class="item_price">{{number_format($item->price_sale)}} đ</em></p>
+                                @else
+                                <p ><em class="item_price">{{number_format($item->price)}} đ</em></p>
+                                @endif
                                     <div class="block">
                                     <div class="starbox small ghosting"> </div>
                                 </div>
