@@ -106,7 +106,7 @@ class ProductController extends Controller
                 $arrclassifies->save();
             }
         }
-        return redirect()->route('admin/product/'.$nextId.'/edit')->with('success',"Thêm thành công");
+        return redirect()->route('product.edit',$nextId)->with('success',"Thêm thành công");
     }
 
     /**
