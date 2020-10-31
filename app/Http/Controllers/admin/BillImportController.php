@@ -22,7 +22,7 @@ class BillImportController extends Controller
      */
     public function index()
     {
-
+        // tương tự đơn xuất hàng
         $provider =  Provider::all();
         $arr_provider = [];
         foreach ($provider as $key => $value) {

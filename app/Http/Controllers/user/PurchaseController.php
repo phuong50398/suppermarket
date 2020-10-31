@@ -12,6 +12,8 @@ class PurchaseController extends Controller
 {
     public function index()
     {
+
+        // hàm lấy danh sách các đơn đặt hàng
         $category = Category::where('active',1)->orderBy('id','DESC')->limit(6)->get();
 
         $data['listMenu'] = $category;
@@ -20,6 +22,7 @@ class PurchaseController extends Controller
                                     ->with(['purchaseOrderDetail' => function($pod){
                                         $pod->with(['product']);
                                     }])->orderBy('date','DESC')->get();
+        // các trạng thái đơn hàng
         $constStatus = array(
             0 => 'Đã đặt hàng',
             1 => 'Đã xác nhận',

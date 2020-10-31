@@ -13,6 +13,8 @@ class ProfileController extends Controller
 {
     public function index()
     {
+        // hàm lấy thông tin profile KH
+
         $category = Category::where('active',1)->orderBy('id','DESC')->limit(6)->get();
 
         $data['listMenu'] = $category;
@@ -25,6 +27,7 @@ class ProfileController extends Controller
     }
     public function update(Request $request, $id)
     {
+        // hàm update thông tin KH
         $path =  null;
         if($request->images){
             $path = $request->images->store('uploads/user','public');
@@ -48,6 +51,8 @@ class ProfileController extends Controller
              'address' => json_encode((object)['tinh' => $request->tinh, 'huyen' => $request->huyen, 'xa' => $request->xa, 'diachi' => $request->diachi])
             ]
         );
+
+        // gán lại thông tin mới của khách vào session
         Auth::user()->name = $request->hoten;
         Auth::user()->ngaysinh = $request->ngaysinh;
         Auth::user()->gioitinh = $request->gioitinh;
@@ -60,6 +65,7 @@ class ProfileController extends Controller
     }
     public function ajaxGetAndress(Request $request)
     {
+        // hàm lấy thông tin tỉnh, huyện, xã
         if($request->type=='huyen'){
             $district = array_filter(
                 Address::district(),

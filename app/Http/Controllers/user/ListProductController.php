@@ -14,6 +14,7 @@ class ListProductController extends Controller
 {
     public function index($name)
     {
+        // lấy dssp theo 1 danh mục
         $listSale = Sale::with('saleProduct')
             ->where('sale',1)
             ->where('start_time','<=',date('Y-m-d H:i', time()))

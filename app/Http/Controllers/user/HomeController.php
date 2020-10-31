@@ -18,18 +18,23 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // trang home sẽ lấy ds sản phẩm khuyến mãi
         $listSale = Sale::with('saleProduct')
             ->where('sale',1)
             ->where('start_time','<=',date('Y-m-d H:i', time()))
             ->where('end_time','>=',date('Y-m-d H:i', time()))->get();
 
+            // lấy danh mục đổ menu
         $category = Category::where('active',1)->orderBy('id','DESC')->limit(6)->get();
 
         $data['listMenu'] = $category;
+
+        // lấy dssp mới về
         $new_product = Product::with(['productClassify' => function($c){
         }])->where('active', 1)->orderBy('id','DESC')->limit(8)->get();
         $data['new_product'] = checkSale($new_product, $listSale);
 
+        // lặp qua từng sp trong danh mục xem có cái nào đc khuyến mãi thì để theo giá km
         foreach ($category as $key => $value) {
             $listProduct = Product::with(['productClassify' => function($c){
             }])->where('category_id', $value->id)->where('active',1)->limit(8)->get();
@@ -42,6 +47,7 @@ class HomeController extends Controller
 
     public function searchProduct()
     {
+        // hàm tìm kiếm sp
         $search = request()->query('search');
 
         $namecg = array(
@@ -79,6 +85,7 @@ class HomeController extends Controller
 
     public function ajaxGetProduct(Request $request)
     {
+        // hàm lấy sản phẩm khi ấn nút add cart
         $product =  Product::with(['productClassify' => function($c){
         }])->where('id', $request->id)->get()->toArray();
         foreach ($product as $key => $value){
@@ -90,6 +97,7 @@ class HomeController extends Controller
     }
     public function ajaxAddCart(Request $request)
     {
+        // hàm thêm sp vào giỏ hàng
         $count = 0;
         $carts = json_decode($request->carts);
         $check_cart =  Cart::where('user_id', Auth::user()->id)->get();
@@ -147,6 +155,7 @@ class HomeController extends Controller
 
     public function ajaxCountCart(Request $request)
     {
+        // hàm đếm sp trong giỏ hàng để đổ số lên cái icon giỏ hàng
         $check_cart =  Cart::where('user_id', Auth::user()->id)->get();
         $count = 0;
         if(!empty($check_cart->toArray())){

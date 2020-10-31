@@ -2,6 +2,8 @@ $(document).ready(function() {
     const url = 'http://localhost/suppermarket/';
     const expirationDuration = 1000 * 60 * 60 * 12; // 12 hours
     var saleCart = [];
+
+    // hàm sự kiện checkbox vào chọn từng sp
     $('input[type="checkbox"]').iCheck({
         checkboxClass: 'icheckbox_flat-orange',
         radioClass: 'iradio_flat-orange'
@@ -15,6 +17,7 @@ $(document).ready(function() {
 
         // } 
         arrCart = [];
+        // hàm gọi ajax lấy danh sách giỏ hàng
         $.ajax({
             type: "post",
             url: url + 'ajaxGetCart',
@@ -87,6 +90,7 @@ $(document).ready(function() {
         });
     }
 
+    // sự kiện ấn tăng/giảm số lượng sp ở giỏ hàng
     function actionChange() {
         $(document).on('click', '.value-plus, .value-minus', function() {
             thiss = $(this);
@@ -116,7 +120,9 @@ $(document).ready(function() {
         });
         $(document).on('ifToggled', '.icheckbox_flat-orange', function(event) {
             updateTotal();
-        })
+        });
+
+        // sự kiên bỏ chọn sp
         $(document).on('ifToggled', '.check-all', function(event) {
             checked = $('.cross input[name="product[]"]:checked');
             check = $('.cross input[name="product[]"]');
@@ -128,6 +134,8 @@ $(document).ready(function() {
             }
             updateTotal();
         })
+
+        // sự kiện ấn xóa sp giỏ hàng
         $(document).on('click', '.trash', function() {
             if (confirm('Bạn có muốn xóa sản phẩm trong giỏ hàng')) {
                 product = $(this).attr('data-product');
@@ -152,6 +160,8 @@ $(document).ready(function() {
         });
     }
 
+
+    // hàm tính tổng tiền những sp đc chọn
     function updateTotal() {
         listChecked = $('.cross input[name="product[]"]:checked');
         listAmount = $('.table-cart .value');

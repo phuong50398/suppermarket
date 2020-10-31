@@ -25,6 +25,7 @@ class ProductController extends Controller
     {
         $category = Category::all();
         $arrCategory = [];
+        // cái này lặp để gán id của danh mục thành key của mảng, khi đổ ra bảng ds sp thì có cột danh mục
         foreach ($category as $key => $value) {
             $arrCategory[$value->id] = $value->name;
          }
@@ -42,8 +43,10 @@ class ProductController extends Controller
      */
     public function create()
     {
+        // hàm này gọi khi vào trang thêm mới sp, trả về view create_product
         $classifies = DB::table('classifies')->get();
 
+        // lấy ds danh mục để đổ ra ô select chọn danh mục cho sp, tương tự lấy nhà cc, nhà sx
         $category = Category::where('active',1)->get();
         // dd(stringcode(13,2));
         $data['classifies'] = $classifies;
@@ -61,6 +64,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // save sp
         $statement = DB::select("SHOW TABLE STATUS LIKE 'products'");
         $nextId = $statement[0]->Auto_increment;
 
@@ -79,6 +83,7 @@ class ProductController extends Controller
         }else{
             $product->active = $request->active;
         }
+        // check độ lớn ảnh và album
         if($request->images->getSize() > 2096128){
             return redirect()->route('product.create')->with('warning',"Hình ảnh không được vượt quá 2047MB");
         }
@@ -87,8 +92,10 @@ class ProductController extends Controller
                 return redirect()->route('product.create')->with('warning',"Hình ảnh không được vượt quá 2047MB");
             }
         }
+        // upload và trả lại đường dẫn ảnh
         $path = $request->images->store('uploads','public');
         $product->images = $path;
+        // cắt ảnh với kích thước 200x280
         $this->resize_crop_image(200, 280, "public/".$path, "public/thumbnails/".$path);
 
         $product->save();
@@ -100,6 +107,7 @@ class ProductController extends Controller
             $arralbum->product_id = $nextId;
             $arralbum->save();
         }
+        // lặp qua các phân loại sp để lưu vào bảng ProductClassification
         if($request->classifies != null){
             foreach ($request->classifies as $classify){
                 $arrclassifies = new ProductClassification();
@@ -130,6 +138,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        // đổ lại dữ liêu vào form
         $product = Product::find($id);
         $arralbum = Album::where('product_id', $id)->get();
         $arrclassifies = ProductClassification::where('product_id', $id)->get();
@@ -231,6 +240,7 @@ class ProductController extends Controller
     }
     public function getData()
     {
+        // hàm này k dùng
 
         $classifies = DB::table('classifies')->get();
 
@@ -241,6 +251,9 @@ class ProductController extends Controller
         $data['producers'] = DB::table('producers')->get();
         return data;
     }
+
+
+    // hàm cắt ảnh
     function resize_crop_image($max_width, $max_height, $source_file, $dst_dir, $quality = 80){
         $imgsize = getimagesize($source_file);
         // dd($imgsize);
@@ -294,6 +307,9 @@ class ProductController extends Controller
         if($src_img)imagedestroy($src_img);
     }
 
+
+    // hàm nay để lưu phân loại khi ấn nút thêm ở trang tạo sp (gọi ajax)
+    // hàm nào có chữ ajax ở đầu là bên jquery gọi ajax đến
     public function ajaxSaveClassify(Request $request)
     {
         $classify = new Classify();

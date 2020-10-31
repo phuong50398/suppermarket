@@ -20,6 +20,8 @@ class BillExportController extends Controller
      */
     public function index()
     {
+        // lấy danh sách đơn xuất hàng phân trang 20 dòng/1trang
+        // gán vào mảng truyền xuống view
         $data['listBillExport'] = BillExport::withCount('billDetail')->latest()->paginate(20);
         return View('admin/billExport', $data);
     }
@@ -31,7 +33,8 @@ class BillExportController extends Controller
      */
     public function create()
     {
-        // $data['provider'] = Provider::all();
+        // gọi hàm khi vào trag tạo đơn xuất hàng, trả về view create_billExport
+        // Product::latest() lấy danh sách sản phẩm gần nhất
         $data['product'] = Product::latest()->get();
         return View('admin/create_billExport', $data);
     }
@@ -44,6 +47,7 @@ class BillExportController extends Controller
      */
     public function store(Request $request)
     {
+        // hàm để lưu đơn xuất
         $statement = DB::select("SHOW TABLE STATUS LIKE 'bill_exports'");
         $nextId = $statement[0]->Auto_increment;
 
@@ -51,6 +55,7 @@ class BillExportController extends Controller
         $billExport->user_id = Auth::id();
         $billExport->payments = 0;
         $billExport->status = $request->status;
+        // định dạng chi phí gửi lên là 10,000 có dấu phẩy nên phải thay thế ',' thành rỗng =>10000 để lưu DB
         $billExport->cost = str_replace(',','',$request->cost);
         $billExport->note = $request->note;
         $billExport->date_of_export = date('Y-m-d H:i:s', time());
@@ -59,6 +64,7 @@ class BillExportController extends Controller
         $listPrice = $request->price;
         $listProduct = $request->product;
         $arrDetail = [];
+        // lặp qua các sản phẩn khi chọn để xuất hàng, để nhét vào mảng rồi lưu BillExportDetail
         foreach ($listAmount as $key => $value) {
             $detail = array(
                 'bill_export_id' => $nextId,
@@ -71,7 +77,9 @@ class BillExportController extends Controller
         }
         $billExport->payments += $billExport->cost;
         $billExport->save();
+        // lưu vào bảng chi tiết đơn xuất hàng
         BillExportDetail::insert($arrDetail);
+        // update bảng tồn kho
         $this->updateWarehouse($listProduct);
         return redirect()->route('billExport.index')->with('success',"Tạo đơn xuất hàng thành công");
     }
@@ -95,6 +103,7 @@ class BillExportController extends Controller
      */
     public function edit($id)
     {
+        // gọi khi ấn edit để đổ lại dữ liệu vào form
         $billExport = BillExport::with(['billDetail'])->where('id', $id)->get();
         $arrIdProduct = [];
         $sumPrice = 0;
@@ -126,6 +135,7 @@ class BillExportController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // ấn update lại dữ liệu
         if($request->status=='chuyenhang'){
             $billExport = BillExport::find($id);
             $billExport->status = 1;
@@ -175,6 +185,7 @@ class BillExportController extends Controller
      */
     public function destroy($id)
     {
+        // xóa đơn xuất hàng, phải xóa chi tiết đơn xuất hàng trước
         $billExport = BillExport::find($id);
         BillExportDetail::where('bill_export_id',$id)->delete();
         $billExport->delete();
@@ -182,7 +193,7 @@ class BillExportController extends Controller
     }
     public function updateWarehouse($arrIdProduct)
     {
-        // $listProduct = Product::latest()->paginate(20)->toArray();
+        // hàm để update tồn kho
         foreach ($arrIdProduct as $key => $value) {
             $warehouse = new Warehouse();
             $productWarehouse = DB::table('warehouses')->where('product_id', $value)

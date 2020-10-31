@@ -54,6 +54,7 @@ class ProducerController extends Controller
         $producer->email = $request->email;
         $producer->phone = $request->phone;
         $producer->address = $request->address;
+        // chek xem có chọn ảnh k
         if($request->images!=null){
             if($request->images->getSize() > 2096128){
                 return redirect()->route('producer.create')->with('warning',"Hình ảnh không được vượt quá 2047MB");

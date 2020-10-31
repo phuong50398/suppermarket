@@ -18,6 +18,7 @@ class SaleController extends Controller
      */
     public function index()
     {
+        // lấy ds các khuyến mãi và sắp xếp start_time từ lớn đến bé
         $listsale = Sale::orderBy('start_time', 'DESC')->get();
         $data['listsale'] = $listsale;
         return View('admin/sale', $data);
@@ -30,6 +31,7 @@ class SaleController extends Controller
      */
     public function create()
     {
+        // gọi hàm khi vào trang tạo km
         $data[''] = '';
         return View('admin/create_sale', $data);
     }
@@ -42,6 +44,7 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
+        //lưu km
         $sale = new Sale();
         $sale->name = $request->name;
         $sale->sale = $request->sale;
@@ -50,11 +53,15 @@ class SaleController extends Controller
 
         $sale->start_time = date('Y-m-d H:i:s', strtotime($request->start_time));
         $sale->end_time = date('Y-m-d H:i:s', strtotime($request->end_time));
+
+        // check xem có chọn không giới hạn số lượng
         if($request->unlimit){
             $sale->amount_applied = 'unlimit';
         }else{
             $sale->amount_applied = $request->amount_applied;
         }
+
+        // check từng phương thức khuyến mãi để lưu vào DB cho đúng
         switch ($request->type) {
             case 1:
                 $sale->price_form = $request->price_form;
@@ -75,6 +82,8 @@ class SaleController extends Controller
                 }else{
                     $arrsale_product = [];
                     $sale->save();
+
+                    // lặp qua từng sp để lưu vào bảng sale_products
                     foreach ($request->product as $key => $value) {
                         $arrsale_product[] = array(
                             'sale_id' => $sale->id,

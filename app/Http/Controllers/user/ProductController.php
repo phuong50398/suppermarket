@@ -13,6 +13,8 @@ class ProductController extends Controller
 {
     public function index(Request $request, $slug)
     {
+        // hàm lấy chi tiết 1 sp và các sp liên quan
+        
         $listSale = Sale::with('saleProduct')
             ->where('sale',1)
             ->where('start_time','<=',date('Y-m-d H:i', time()))

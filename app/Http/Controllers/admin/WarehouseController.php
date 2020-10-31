@@ -12,6 +12,9 @@ class WarehouseController extends Controller
 {
     public function index()
     {
+        // lấy ra các thông tin bảng tồn kho, đơn xuất hàng, nhập hàng để truyền xuất view
+
+        // tính tổng tồn đầu, tồn cuối, tổng nhập, xuát theo từng sp
         $warehouse = Warehouse::with(['product'])
                     ->groupBy('product_id')
                     ->selectRaw('sum(end_inventory) as sumtoncuoi, sum(sum_import) as sumtongnhap, sum(sum_export) as sumtongxuat, product_id')
