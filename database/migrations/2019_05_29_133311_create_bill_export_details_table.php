@@ -18,7 +18,7 @@ class CreateBillExportDetailsTable extends Migration
             $table->bigInteger('bill_export_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
             $table->integer('amount_export');
-            $table->float('price_export');
+            $table->integer('price_export');
             $table->timestamps();
             $table->primary(array('bill_export_id', 'product_id'));
 

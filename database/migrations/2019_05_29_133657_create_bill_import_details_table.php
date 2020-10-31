@@ -17,7 +17,7 @@ class CreateBillImportDetailsTable extends Migration
             $table->bigInteger('bill_import_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
             $table->integer('amount_import');
-            $table->float('price_import');
+            $table->integer('price_import');
             $table->timestamps();
             $table->primary(array('bill_import_id', 'product_id'));
 
