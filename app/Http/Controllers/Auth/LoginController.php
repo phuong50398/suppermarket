@@ -38,8 +38,8 @@ class LoginController extends Controller
                 return redirect('/admin/wellcome');
             }
         
-            return redirect('/admin/wellcome');
-            // return redirect('/');
+            // return redirect('/admin/wellcome');
+            return redirect('/');
         }
     
 

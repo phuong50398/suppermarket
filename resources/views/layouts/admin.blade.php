@@ -112,7 +112,6 @@
                                 <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{url('admin/category')}}">Danh mục</a>
                                 <a class="dropdown-item" href="{{url('admin/sale/create')}}">Thêm khuyến mãi</a>
                                 <a class="dropdown-item" href="{{url('admin/sale')}}">Danh sách khuyến mãi</a>
                             </div>
@@ -120,42 +119,16 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-none d-md-block">
-                                    <i class="far fa-file-alt"></i>
-                                 Đơn hàng <i class="fa fa-angle-down"></i>
-                            </span>
-                                <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Danh sách đơn hàng</a>
-                                <a class="dropdown-item" href="#">Quản lý giao hàng</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-md-block">
                                     <i class="mdi mdi-cube-outline"></i>
-                                    Sản phẩm <i class="fa fa-angle-down"></i>
+                                    Quản lý sản phẩm <i class="fa fa-angle-down"></i>
                             </span>
                                 <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{url('admin/category')}}">Danh mục</a>
                                 <a class="dropdown-item" href="{{url('admin/classify')}}">Phân loại sản phẩm</a>
                                 <a class="dropdown-item" href="{{url('admin/product/create')}}">Thêm sản phẩm</a>
                                 <a class="dropdown-item" href="{{url('admin/product')}}">Danh sách sản phẩm</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-md-block">
-                                    <i class="mdi mdi-cube-outline"></i>
-                                    Quản lý kho <i class="fa fa-angle-down"></i>
-                            </span>
-                                <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{url('admin/warehouse')}}">Quản lý kho</a>
-                                <a class="dropdown-item" href="{{url('admin/billImport')}}">Nhập hàng</a>
-                                <a class="dropdown-item" href="{{url('admin/billExport')}}">Chuyển hàng</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -169,6 +142,50 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{url('admin/producer')}}">Nhà sản xuất</a>
                                 <a class="dropdown-item" href="{{url('admin/provider')}}">Nhà cung cấp</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-none d-md-block">
+                                    <i class="far fa-file-alt"></i>
+                                 Quản lý bán hàng <i class="fa fa-angle-down"></i>
+                            </span>
+                                <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Cập nhật thông tin khách hàng</a>
+                                <a class="dropdown-item" href="#">Cập nhật đơn đặt hàng</a>
+                                <a class="dropdown-item" href="#">Thêm đơn trả hàng</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-none d-md-block">
+                                    <i class="mdi mdi-cube-outline"></i>
+                                    Quản lý kho <i class="fa fa-angle-down"></i>
+                            </span>
+                                <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{url('admin/billImport/create')}}">Thêm đơn nhập hàng</a>
+                                <a class="dropdown-item" href="{{url('admin/billImport')}}">Danh sách đơn nhập hàng</a>
+                                <a class="dropdown-item" href="{{url('admin/billExport/create')}}">Thêm đơn xuất hàng</a>
+                                <a class="dropdown-item" href="{{url('admin/billExport')}}">Danh sách đơn xuất hàng</a>
+                                <a class="dropdown-item" href="{{url('admin/warehouse')}}">Trích xuất số lượng tồn kho</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-none d-md-block">
+                                    <i class="fa fa-line-chart" aria-hidden="true"></i>
+                                    Báo cáo thống kê <i class="fa fa-angle-down"></i>
+                            </span>
+                                <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Báo cáo bán hàng</a>
+                                <a class="dropdown-item" href="#">Báo cáo nhập hàng</a>
+                                <a class="dropdown-item" href="#">Báo cáo tài chính</a>
                             </div>
                         </li>
                         <!-- <li class="nav-item dropdown">

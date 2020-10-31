@@ -55,7 +55,7 @@
                         <option value="">-----Chọn phường/xã-----</option>
                         @foreach ($town as $item)
                             @if ($address!='' && $item->district_id == $address->huyen)
-                                <option value="{{$item->id}}" {{$address != null ? ($address->xa == $item1->id ? 'selected' : '') : ''}}>{{$item->name_town}}</option>
+                                <option value="{{$item->id}}" {{$address != '' ? ($address->xa == $item->id ? 'selected' : '') : ''}}>{{$item->name_town}}</option>
                             @endif
                         @endforeach
                     </select>
