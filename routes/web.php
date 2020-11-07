@@ -28,6 +28,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('producer', 'admin\ProducerController');
     Route::resource('provider', 'admin\ProviderController');
     Route::resource('classify', 'admin\ClassifyController');
+    Route::resource('billOrder', 'admin\BillOrderController');
+    Route::resource('adminprofile', 'admin\ProfileController');
+    Route::resource('report', 'admin\ReportController');
+    Route::get('reportImport', 'admin\ReportController@reportImport');
+    Route::get('reportMoney', 'admin\ReportController@reportMoney');
 
     // ajax
     Route::post('ajaxSaveClassify','admin\ProductController@ajaxSaveClassify');
@@ -52,6 +57,7 @@ Route::resource('buynow', 'user\CartController');
 Route::get('/profile', 'user\ProfileController@index')->name('profile');
 Route::resource('/profile', 'user\ProfileController');
 Route::get('/purchase', 'user\PurchaseController@index')->name('purchase');
+Route::post('request', 'user\PurchaseController@request')->name('request');
 
 Route::post('ajaxGetCart', 'user\CartController@ajaxGetCart');
 Route::post('ajaxDeleteProduct', 'user\CartController@ajaxDeleteProduct');

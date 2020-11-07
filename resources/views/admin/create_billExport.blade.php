@@ -7,12 +7,12 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title">Chuyển hàng</h4>
+                    <h4 class="page-title">Đơn xuất hàng</h4>
                     <div class="ml-auto text-right">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Chuyển hàng</li>
+                                <li class="breadcrumb-item active" aria-current="page">Đơn xuất hàng</li>
                             </ol>
                         </nav>
                     </div>
@@ -57,7 +57,7 @@
                         <thead>
                             <tr>
                                 <th>Tên sản phẩm</th>
-                                <th style="width: 20%">Giá nhập</th>
+                                <th style="width: 20%">Giá xuất</th>
                                 <th style="width: 10%">Số lượng</th>
                                 <th style="width: 20%">Thành tiền</th>
                             </tr>

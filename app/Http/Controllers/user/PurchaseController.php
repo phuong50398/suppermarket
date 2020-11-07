@@ -22,17 +22,26 @@ class PurchaseController extends Controller
                                     ->with(['purchaseOrderDetail' => function($pod){
                                         $pod->with(['product']);
                                     }])->orderBy('date','DESC')->get();
+                                    
         // các trạng thái đơn hàng
         $constStatus = array(
             0 => 'Đã đặt hàng',
             1 => 'Đã xác nhận',
-            2 => 'Đã chuyển tới đơn vị vận chuyển',
-            4 => 'Đã giao hàng',
-            5 => 'Đã hủy đơn'
+            2 => 'Đã tới đơn vị vận chuyển',
+            3 => 'Đã giao hàng',
+            5 => 'Đã hủy đơn',
+            4 => 'Yêu cầu hủy'
         );
                                     // dd($purchase);
         $data['purchase'] = $purchase;
         $data['constStatus'] = $constStatus;
         return view('user.purchase', $data);
+    }
+    public function request(Request $request)
+    {
+        $billOrder = PurchaseOrder::find($request->id);
+        $billOrder->status = $request->status;
+        $billOrder->save();
+        return redirect()->route('purchase');
     }
 }

@@ -77,7 +77,7 @@ class CartController extends Controller
             if(isset($value['list_sale'])){
                 $list_sale .= ','.$value['list_sale'];
             }
-            $total += $value['amount'] * $value['product']['price'];
+            $total += $value['amount'] * $price;
         }
 
         foreach ($saleCart as $key => $value) {
@@ -98,7 +98,7 @@ class CartController extends Controller
 
         // lưu vào bảng purchase_orders
         DB::table('purchase_orders')->insert(
-            ['delivery_address' => $address->diachi.' '.Address::findId('xa', $address->xa)->name_town.' '.Address::findId('huyen', $address->huyen)->name_district.' '.Address::findId('tinh', $address->tinh)->name_city,
+            ['delivery_address' => $address->diachi.' - '.Address::findId('xa', $address->xa)->name_town.' - '.Address::findId('huyen', $address->huyen)->name_district.' - '.Address::findId('tinh', $address->tinh)->name_city,
              'total' => $total,
              'date' => date('Y-m-d H:i:s', time()),
              'status' => 0,

@@ -153,9 +153,9 @@
                                 <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Cập nhật thông tin khách hàng</a>
-                                <a class="dropdown-item" href="#">Cập nhật đơn đặt hàng</a>
-                                <a class="dropdown-item" href="#">Thêm đơn trả hàng</a>
+                                <a class="dropdown-item" href="{{url('admin/adminprofile')}}">Thông tin khách hàng</a>
+                                <a class="dropdown-item" href="{{url('admin/billOrder')}}">Cập nhật đơn đặt hàng</a>
+                               
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -183,9 +183,9 @@
                                 <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Báo cáo bán hàng</a>
-                                <a class="dropdown-item" href="#">Báo cáo nhập hàng</a>
-                                <a class="dropdown-item" href="#">Báo cáo tài chính</a>
+                                <a class="dropdown-item" href="{{url('admin/report')}}">Báo cáo bán hàng</a>
+                                <a class="dropdown-item" href="{{url('admin/reportImport')}}">Báo cáo nhập hàng</a>
+                                <a class="dropdown-item" href="{{url('admin/reportMoney')}}">Báo cáo tài chính</a>
                             </div>
                         </li>
                         <!-- <li class="nav-item dropdown">

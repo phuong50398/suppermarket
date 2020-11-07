@@ -10,4 +10,8 @@ class BillImportDetail extends Model
     {
         return $this->belongsTo(BillImport::class);
     }
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

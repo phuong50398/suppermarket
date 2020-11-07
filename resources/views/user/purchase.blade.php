@@ -43,6 +43,14 @@
                         <h3 class="tongtien text-right">
                             Thanh toán: {{number_format($item->total)}} đ
                         </h3>
+                        @if ($item->status<3)
+                            <form action="{{route('request', $item->id)}}" method="POST" style="display: contents;">
+                                @method('post')
+                                @csrf
+                                <input type="hidden" name="id" value="{{$item->id}}">
+                                <button style='float: right; margin: 10px;' name="status" value="4" type="submit" class="btn btn-danger btn-sm">Yêu cầu hủy đơn</button>
+                            </form>
+                        @endif
                     </div>
               </div>
             @endforeach

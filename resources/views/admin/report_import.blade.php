@@ -6,12 +6,12 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title">Quản lý kho</h4>
+                    <h4 class="page-title">Báo cáo nhập hàng</h4>
                     <div class="ml-auto text-right">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Quản lý kho</li>
+                                <li class="breadcrumb-item"><a href="#">Báo cáo thống kê</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Báo cáo nhập hàng</li>
                             </ol>
                         </nav>
                     </div>
@@ -31,7 +31,7 @@
                                         <select required name="thang" class="form-control">
                                             <option value="tatca">Tất cả</option>
                                             @for ($i = 1; $i < 13; $i++)
-                                                <option {{($thang == $i) ? "selected" : ""}}  value="{{$i}}">{{$i}}</option>
+                                                <option {{($thang == $i) ? "selected" : ""}} value="{{$i}}">{{$i}}</option>
                                             @endfor
                                         </select>
                                     </div>
@@ -46,7 +46,7 @@
                                         <select required name="nam" class="form-control">
                                             <option value="tatca">Tất cả</option>
                                             @for ($i = 2019; $i < date('Y',time())+5; $i++)
-                                                <option {{($nam == $i) ? "selected" : ""}}  value="{{$i}}">{{$i}}</option>
+                                                <option {{($nam == $i) ? "selected" : ""}} value="{{$i}}">{{$i}}</option>
                                             @endfor
                                         </select>
                                     </div>
@@ -75,23 +75,20 @@
                         <tr>
                             <th scope="col" class="text-center">Ảnh đại diện</th>
                             <th scope="col" class="text-center">Tên sản phẩm</th>
-                            <th scope="col" class="text-center">Tồn kho</th>
-                            <th scope="col" class="text-center">Tổng nhập</th>
-                            <th scope="col" class="text-center">Tổng xuất</th>
-                            <th scope="col" class="text-center">Hàng đang về</th>
-                            <th scope="col" class="text-center">Hàng đang giao</th>
+                            <th scope="col" class="text-center">Số lượng nhập</th>
+                            <th scope="col" class="text-center">Giá nhập</th>
+                            <th scope="col" class="text-center">Ngày nhập</th>
                         </tr>
                     </thead>
                     <tbody class="customtable">
-                        @foreach ($warehouse as $item)
+                        @foreach ($report as $item)
                             <tr>
                                 <td class="text-center"><img src="{{url('public/'.$item->product->images)}}" alt="" width="50px"></td>
                                 <td>{{$item->product->name}}</td>
-                                <td class="text-center">{{$item->sumtoncuoi}}</td>
-                                <td class="text-center">{{$item->sumtongnhap}}</td>
-                                <td class="text-center">{{$item->sumtongxuat}}</td>
-                                <td class="text-center">{{isset($billImport[$item->product_id]) ? $billImport[$item->product_id] : 0}}</td>
-                                <td class="text-center">{{isset($billExport[$item->product_id]) ? $billExport[$item->product_id] : 0}}</td>
+                                <td class="text-center">{{$item->amount_import}}</td>
+                                <td class="text-center">{{number_format($item->price_import)}}</td>
+                                <td class="text-center">{{date('d/m/Y', strtotime($date_import[$item->bill_import_id]))}}</td>
+                                
                             </tr>
                         @endforeach
 
@@ -102,10 +99,10 @@
         <div class="col-md-12 p-r-60 p-t-20">
             <ul class="pagination" style="float: right">
                 <li  class="page-item"><a class="page-link" href="{{url()->current()}}"><span aria-hidden="true">«</span></span></a></li>
-                    @for ($i = 1; $i <= $warehouse->lastPage(); $i++)
-                        <li class="{{($warehouse->currentPage()==$i) ? 'active' : ''}} page-item"><a class="page-link" href="{{url()->current()}}?page={{$i}}" >{{$i}}</a></li>
+                    @for ($i = 1; $i <= $report->lastPage(); $i++)
+                        <li class="{{($report->currentPage()==$i) ? 'active' : ''}} page-item"><a class="page-link" href="{{url()->current()}}?page={{$i}}" >{{$i}}</a></li>
                     @endfor
-                <li  class="page-item"><a class="page-link" href="{{url()->current()}}?page={{$warehouse->lastPage()}}"><span aria-hidden="true">»</span></span></a></li>
+                <li  class="page-item"><a class="page-link" href="{{url()->current()}}?page={{$report->lastPage()}}"><span aria-hidden="true">»</span></span></a></li>
             </ul>
         </div>
     </div>
