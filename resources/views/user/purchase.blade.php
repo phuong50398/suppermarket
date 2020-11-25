@@ -43,7 +43,7 @@
                         <h3 class="tongtien text-right">
                             Thanh toán: {{number_format($item->total)}} đ
                         </h3>
-                        @if ($item->status<3)
+                        @if ($item->status<2)
                             <form action="{{route('request', $item->id)}}" method="POST" style="display: contents;">
                                 @method('post')
                                 @csrf

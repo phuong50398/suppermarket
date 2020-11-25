@@ -18,7 +18,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // trang home sẽ lấy ds sản phẩm khuyến mãi
+        // trang home sẽ lấy ds  khuyến mãi
         $listSale = Sale::with('saleProduct')
             ->where('sale',1)
             ->where('start_time','<=',date('Y-m-d H:i', time()))

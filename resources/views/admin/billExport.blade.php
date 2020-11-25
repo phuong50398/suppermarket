@@ -6,12 +6,12 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title">Danh sách đơn chuyển hàng</h4>
+                    <h4 class="page-title">Danh sách đơn xuất hàng</h4>
                     <div class="ml-auto text-right">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Danh sách đơn chuyển hàng</li>
+                                <li class="breadcrumb-item active" aria-current="page">Danh sách đơn xuất hàng</li>
                             </ol>
                         </nav>
                     </div>
@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-12 col-lg-12 col-xlg-12 p-t-30 row p-r-50 p-l-50">
             <div class="col-md-12 text-right p-b-10">
-                <a href="billExport/create"><button class="btn btn-primary">Thêm đơn chuyển hàng</button></button></a>
+                <a href="billExport/create"><button class="btn btn-primary">Thêm đơn xuất hàng</button></button></a>
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered">

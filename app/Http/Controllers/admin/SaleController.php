@@ -63,15 +63,7 @@ class SaleController extends Controller
 
         // check từng phương thức khuyến mãi để lưu vào DB cho đúng
         switch ($request->type) {
-            case 1:
-                $sale->price_form = $request->price_form;
-                $sale->price_to = $request->price_to;
-                $sale->discount = $request->discount;
-                $sale->unit = $request->unit;
-                $sale->method = 'Chiết khấu theo tổng giá trị đơn hàng';
-                $sale->save();
-                break;
-
+          
             case 2:
                 $sale->method = 'Chiết khấu theo từng sản phẩm';
                 if($request->all){

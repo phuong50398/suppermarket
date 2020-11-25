@@ -37,10 +37,9 @@
                             <select name="type" id="" class="form-control method_sale">
                                 <option value="">------Chọn phương thức khuyến mãi------</option>
                                 <option value="2" {{(isset($action) && old('type', $sale->type) == 2) ? "selected" : ""}}>Chiết khấu theo từng sản phẩm</option>
-                                <option value="3" {{(isset($action) && old('type', $sale->type) == 3) ? "selected" : ""}}>Chiết khấu theo từng loại sản phẩm</option>
                                 <option value="4" {{(isset($action) && old('type', $sale->type) == 4) ? "selected" : ""}}>Chiết khấu theo nhà sản xuất</option>
                                 <option value="5" {{(isset($action) && old('type', $sale->type) == 5) ? "selected" : ""}}>Chiết khấu theo nhà cung cấp</option>
-                                <option value="6" {{(isset($action) && old('type', $sale->type) == 6) ? "selected" : ""}}>Chiết khấu theo số lượng mua</option>
+                              
                             </select>
                         </div>
                     </div>

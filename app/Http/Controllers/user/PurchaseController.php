@@ -21,7 +21,7 @@ class PurchaseController extends Controller
         $purchase = PurchaseOrder::where('user_id', Auth::user()->id)
                                     ->with(['purchaseOrderDetail' => function($pod){
                                         $pod->with(['product']);
-                                    }])->orderBy('date','DESC')->get();
+                                    }])->orderBy('id','DESC')->get();
                                     
         // các trạng thái đơn hàng
         $constStatus = array(

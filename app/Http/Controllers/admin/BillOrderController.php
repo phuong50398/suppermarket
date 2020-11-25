@@ -16,12 +16,15 @@ class BillOrderController extends Controller
      */
     public function index()
     {
+        // Lấy danh sách đơn đặt hàng
         $purchase = PurchaseOrder::with(['purchaseOrderDetail' => function($pod){
             $pod->with(['product']);
-        }])->latest()->paginate(20);
+        }])->orderBy('id','DESC')->paginate(20);
+
+        // lấy thông tin khách hàng của từng đơn đặt hàng
         foreach ($purchase as $v){
             $v->user =  DB::table('users')
-        ->where('id', $v->user_id)->first();
+            ->where('id', $v->user_id)->first();
         }
        
             // các trạng thái đơn hàng
@@ -33,6 +36,8 @@ class BillOrderController extends Controller
             5 => 'Đã hủy đơn',
             4 => 'Yêu cầu hủy'
             );
+
+            // màu sắc trạng thái đơn hàng
             $constStatusColor = array(
             0 => 'badge-warning',
             1 => 'badge-primary',
@@ -100,6 +105,8 @@ class BillOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        // update trạng thái đơn hàng được gửi lên
         if($request->status){
             $billOrder = PurchaseOrder::find($id);
             $billOrder->status = $request->status;

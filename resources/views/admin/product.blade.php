@@ -41,7 +41,6 @@
                                 <td>{!! ($item->active ==1) ? "<label class='badge badge-success'>active</label>" : "<label class='badge badge-secondary'>not active</label>" !!}</td>
                                 <td>
                                     <a href="{{url('admin/product/'.$item->id.'/edit')}}"><button class="btn btn-warning btn-sm">Sửa</button></a>
-                                    <button class="btn btn-danger btn-sm">Xóa</button>
                                 </td>
                             </tr>
                         @endforeach

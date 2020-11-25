@@ -77,6 +77,7 @@
                             <th scope="col" class="text-center">Tên sản phẩm</th>
                             <th scope="col" class="text-center">Số lượng nhập</th>
                             <th scope="col" class="text-center">Giá nhập</th>
+                            <th scope="col" class="text-center">Nhà cung cấp</th>
                             <th scope="col" class="text-center">Ngày nhập</th>
                         </tr>
                     </thead>
@@ -87,6 +88,7 @@
                                 <td>{{$item->product->name}}</td>
                                 <td class="text-center">{{$item->amount_import}}</td>
                                 <td class="text-center">{{number_format($item->price_import)}}</td>
+                                <td class="text-center">{{$provider_import[$item->bill_import_id]['name']}}</td>
                                 <td class="text-center">{{date('d/m/Y', strtotime($date_import[$item->bill_import_id]))}}</td>
                                 
                             </tr>

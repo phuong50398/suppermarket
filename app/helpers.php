@@ -26,13 +26,14 @@ if (! function_exists('checkSale')){
             foreach ($listProduct as $key => $value) {
                 $arrProduct[$value['product_id']] = $value;
                 $arrProduct[$value['product_id']]['price'] = $value['product']['price'];
+                $arrProduct[$value['product_id']]['provider_id'] = $value['product']['provider_id'];
+                $arrProduct[$value['product_id']]['producer_id'] = $value['product']['producer_id'];
             }
         }else{
             foreach ($listProduct as $key => $value) {
                 $arrProduct[$value['id']] = $value;
             }
         }
-        // dd($listSale);
         
         foreach ($listSale as $ksale => $sale) {
             switch ($sale->type) {
@@ -82,13 +83,13 @@ if (! function_exists('checkSale')){
                     }else{
                         foreach ($sale->saleProduct as  $category) {
                             foreach ($arrProduct as $id => $product) {
-                                if($category->category_type_id == $product->category_type_id){
+                                if($category->category_type_id == $product['category_type_id']){
                                     if(isset($arrProduct[$id]['price_sale'])){
-                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price_sale'] - $sale->discount : $arrProduct[$id]['price_sale'] - ($arrProduct[$id]['price_sale']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($category->unit =='dong') ? $arrProduct[$id]['price_sale'] - $category->discount : $arrProduct[$id]['price_sale'] - ($arrProduct[$id]['price_sale']*$category->discount)/100;
                                         $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
                                         $arrProduct[$id]['list_sale'] = $sale->id;
                                     }else{
-                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price'] - $sale->discount : $arrProduct[$id]['price'] - ($arrProduct[$id]['price']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($category->unit =='dong') ? $arrProduct[$id]['price'] - $category->discount : $arrProduct[$id]['price'] - ($arrProduct[$id]['price']*$category->discount)/100;
                                         $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
                                         $arrProduct[$id]['list_sale'] = $sale->id;
                                     }
@@ -114,13 +115,13 @@ if (! function_exists('checkSale')){
                     }else{
                         foreach ($sale->saleProduct as  $producer) {
                             foreach ($arrProduct as $id => $product) {
-                                if($producer->producer_id == $product->producer_id){
+                                if($producer->producer_id == $product['producer_id']){
                                     if(isset($arrProduct[$id]['price_sale'])){
-                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price_sale'] - $sale->discount : ($arrProduct[$id]['price_sale']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($producer->unit =='dong') ? $arrProduct[$id]['price_sale'] - $producer->discount :  $arrProduct[$id]['price_sale'] - ($arrProduct[$id]['price_sale']*$producer->discount)/100;
                                         $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
                                         $arrProduct[$id]['list_sale'] = $sale->id;
                                     }else{
-                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price'] - $sale->discount : ($arrProduct[$id]['price']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($producer->unit =='dong') ? $arrProduct[$id]['price'] - $producer->discount :  $arrProduct[$id]['price'] - ($arrProduct[$id]['price']*$producer->discount)/100;
                                         $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
                                         $arrProduct[$id]['list_sale'] = $sale->id;
                                     }
@@ -146,13 +147,13 @@ if (! function_exists('checkSale')){
                     }else{
                         foreach ($sale->saleProduct as  $provider) {
                             foreach ($arrProduct as $id => $product) {
-                                if($provider->provider_id == $product->provider_id){
+                                if($provider->provider_id == $product['provider_id']){
                                     if(isset($arrProduct[$id]['price_sale'])){
-                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price_sale'] - $sale->discount : $arrProduct[$id]['price_sale'] - ($arrProduct[$id]['price_sale']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($provider->unit =='dong') ? $arrProduct[$id]['price_sale'] - $provider->discount : $arrProduct[$id]['price_sale'] - ($arrProduct[$id]['price_sale']*$provider->discount)/100;
                                         $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
                                         $arrProduct[$id]['list_sale'] = $sale->id;
                                     }else{
-                                        $arrProduct[$id]['price_sale'] = ($sale->unit =='dong') ? $arrProduct[$id]['price'] - $sale->discount : $arrProduct[$id]['price'] - ($arrProduct[$id]['price']*$sale->discount)/100;
+                                        $arrProduct[$id]['price_sale'] = ($provider->unit =='dong') ? $arrProduct[$id]['price'] - $provider->discount : $arrProduct[$id]['price'] - ($arrProduct[$id]['price']*$provider->discount)/100;
                                         $arrProduct[$id]['price_sale'] = ($arrProduct[$id]['price_sale']<0) ? '0' : $arrProduct[$id]['price_sale'];
                                         $arrProduct[$id]['list_sale'] = $sale->id;
                                     }
