@@ -16,9 +16,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // Lấy ds danh mục và sản phẩm của từng đanh mục => trả xuống view
+        // lấy ra các danh mục & sp sran phẩm
+
         $listCategory = Category::with(['product' => function($c){
         }])->orderBy('id','desc')->get();
+        // gán biến vào mảng để truyền xuống view
         $data['listCategory'] = $listCategory;
         return View('admin/category', $data);
     }
@@ -35,13 +37,12 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * tạo mới
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // hàm thêm
         $category = new Category();
         $category->name = $request->name;
         if($request->active != 1){
@@ -73,7 +74,6 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        // hàm đổ  lại form để sửa
         $listCategory = Category::orderBy('id','desc')->get();
         $category = Category::find($id);
         $data['listCategory'] = $listCategory;
@@ -91,7 +91,6 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // hàm ấn cập nhật dữ iệu
         $category = Category::find($id);
         $category->name = $request->name;
         if($request->active != 1){
@@ -112,7 +111,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        // xóa danh much
         $category = Category::find($id);
         $category->delete();
         return redirect()->route('category.index')->with('success',"Xóa thành công");

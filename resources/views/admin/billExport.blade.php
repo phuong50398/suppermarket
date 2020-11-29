@@ -27,10 +27,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th>
-                                <label class="customcheckbox m-b-20">
-                                    <input type="checkbox" id="mainCheckbox" />
-                                    <span class="checkmark"></span>
-                                </label>
+                                STT
                             </th>
                             <th scope="col">Ngày chuyển</th>
                             <th scope="col">Trạng thái</th>
@@ -41,13 +38,10 @@
                         </tr>
                     </thead>
                     <tbody class="customtable">
-                        @foreach ($listBillExport as $item)
+                        @foreach ($listBillExport as $key => $item)
                             <tr>
                                 <th>
-                                    <label class="customcheckbox">
-                                        <input type="checkbox" class="listCheckbox" />
-                                        <span class="checkmark"></span>
-                                    </label>
+                                    {{$key+1}}
                                 </th>
                                 <td>{{date('d/m/Y', strtotime($item->date_of_export))}}</td>
                                 <td>{!! ($item->status == 1) ? "<label class='badge badge-success'>Đã chuyển hàng</label>" : "<label class='badge badge-secondary'>Đang chuyển hàng</label>" !!}</td>
@@ -55,6 +49,7 @@
                                 <td>{{number_format($item->cost)}}</td>
                                 <td>{{number_format($item->payments)}}</td>
                                 <td>
+                                    <a href="{{url('admin/billExport/'.$item->id)}}" target="_blank"><button class="btn btn-primary btn-sm"> In</button></a>
                                     @if ($item->status==1)
                                         <a href="{{url('admin/billExport/'.$item->id.'/edit')}}"><button class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Xem</button></a>
                                     @else

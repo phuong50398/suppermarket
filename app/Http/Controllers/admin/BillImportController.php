@@ -95,7 +95,28 @@ class BillImportController extends Controller
      */
     public function show($id)
     {
-        //
+        $billImport = BillImport::with(['billDetail'])->where('id', $id)->get();
+        $arrIdProduct = [];
+        $sumPrice = 0;
+        foreach ($billImport[0]->billDetail as $key => $value) {
+            $arrIdProduct[] = $value->product_id;
+            $sumPrice += $value->amount_import*$value->price_import;
+        }
+        $product = Product::latest()->get();
+        $arrProduct = [];
+        foreach ($product as $key => $value) {
+            $arrProduct[$value->id] = $value->name;
+        }
+        // dd($billImport[0]->billDetail->toArray());
+        $data['sumPrice'] = $sumPrice;
+        $data['arrProduct'] = $arrProduct;
+        $data['arrIdProduct'] = $arrIdProduct;
+        $data['billImport'] = $billImport[0];
+        $data['provider'] = Provider::all();
+        $data['product'] = $product;
+        $data['action'] = 'edit';
+        $data['nhapkho'] = 'nhapkho';
+        return View('admin/create_billImport', $data);
     }
 
     /**

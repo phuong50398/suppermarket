@@ -25,12 +25,12 @@
                             <th scope="col" style="width: 10%">Khách hàng</th>
                             <th scope="col">Email</th>
                             <th scope="col">SĐT</th>
-                            <th scope="col">Địa chỉ</th>
+                            <th scope="col" style="width: 10%">Địa chỉ</th>
                             <th scope="col">Trạng thái</th>
                             <th scope="col">Ngày đặt hàng</th>
                             <th scope="col">Phí vận chuyển</th>
                             <th scope="col">Tổng tiền</th>
-                            <th scope="col" style="width: 20%">Tác vụ</th>
+                            <th scope="col" style="width: 15%">Tác vụ</th>
                         </tr>
                     </thead>
                     <tbody class="customtable">
@@ -51,6 +51,7 @@
                                 <td>{{number_format($item->transport_fee)}}</td>
                                 <td>{{number_format($item->total)}}</td>
                                 <td>
+                                    <a href="{{url('admin/billOrder/'.$item->id)}}" target="_blank"><button class="btn btn-info btn-sm"> In</button></a>
                                     <button  data-toggle="modal" data-target="#myModal{{$item->id}}" class=" btn-sm btn btn-primary">Chi tiết</button>
                                     @if ($item->status!=3 && $item->status!=5)
                                         <form action="{{route('billOrder.update', $item->id)}}" method="POST" style="display: contents;">

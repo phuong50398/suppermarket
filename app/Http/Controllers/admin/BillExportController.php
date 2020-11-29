@@ -92,7 +92,26 @@ class BillExportController extends Controller
      */
     public function show($id)
     {
-        //
+        $billExport = BillExport::with(['billDetail'])->where('id', $id)->get();
+        $arrIdProduct = [];
+        $sumPrice = 0;
+        foreach ($billExport[0]->billDetail as $key => $value) {
+            $arrIdProduct[] = $value->product_id;
+            $sumPrice += $value->amount_export*$value->price_export;
+        }
+        $product = Product::latest()->get();
+        $arrProduct = [];
+        foreach ($product as $key => $value) {
+            $arrProduct[$value->id] = $value;
+        }
+        // dd($billImport[0]->billDetail->toArray());
+        $data['sumPrice'] = $sumPrice;
+        $data['arrProduct'] = $arrProduct;
+        $data['arrIdProduct'] = $arrIdProduct;
+        $data['billExport'] = $billExport[0];
+        $data['product'] = $product;
+        $data['action'] = 'edit';
+        return View('admin/print_billExport', $data);
     }
 
     /**

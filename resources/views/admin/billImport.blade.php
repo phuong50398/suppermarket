@@ -27,10 +27,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th>
-                                <label class="customcheckbox m-b-20">
-                                    <input type="checkbox" id="mainCheckbox" />
-                                    <span class="checkmark"></span>
-                                </label>
+                                STT
                             </th>
                             <th scope="col">Nhà cung cấp</th>
                             <th scope="col">Nhập kho</th>
@@ -38,17 +35,14 @@
                             <th scope="col">Số sản phẩm</th>
                             <th scope="col">Chi phí</th>
                             <th scope="col">Tổng tiền nhập</th>
-                            <th scope="col" style="width: 17%">Tác vụ</th>
+                            <th scope="col" style="width: 15%">Tác vụ</th>
                         </tr>
                     </thead>
                     <tbody class="customtable">
-                        @foreach ($listBillImport as $item)
+                        @foreach ($listBillImport as $key => $item)
                             <tr>
                                 <th>
-                                    <label class="customcheckbox">
-                                        <input type="checkbox" class="listCheckbox" />
-                                        <span class="checkmark"></span>
-                                    </label>
+                                    {{$key+1}}
                                 </th>
                                 <td>{{$provider[$item->provider_id]}}</td>
                                 <td>{!! ($item->status == 1) ? "<label class='badge badge-success'>Đã nhập kho</label>" : "<label class='badge badge-secondary'>Chờ nhập hàng</label>" !!}</td>
@@ -60,11 +54,8 @@
                                     @if ($item->status==1)
                                         <a href="{{url('admin/billImport/'.$item->id.'/edit')}}"><button class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Xem</button></a>
                                     @else
-                                        <form action="{{route('billImport.update', $item->id)}}" method="POST" style="display: contents;">
-                                            @method('PUT')
-                                            @csrf
-                                            <button name="status" value="nhapkho" type="submit" class="btn btn-success btn-sm">Nhập kho</button>
-                                        </form>
+                                       
+                                        <a href="{{url('admin/billImport/'.$item->id)}}"><button class="btn btn-success btn-sm"> Nhập kho</button></a>
                                         <a href="{{url('admin/billImport/'.$item->id.'/edit')}}"><button class="btn btn-warning btn-sm">Sửa</button></a>
                                         <form action="{{route('billImport.destroy', $item->id)}}" method="POST" style="display: contents;">
                                             @method('DELETE')

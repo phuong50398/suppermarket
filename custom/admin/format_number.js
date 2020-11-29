@@ -30,12 +30,12 @@ $(document).ready(function() {
         for (let i = 0; i < arr.length; i++) {
             html += '<tr>';
             html += '<td>' + arr.eq(i).html() + '</td>';
-            html += '<td><input type="text" data-type="currency" name="price[]" class="form-control currency text-right" value="' + arr.eq(i).attr('data-price') + '"></td>';
-            html += '<td><input type="number" name="amount[]" class="form-control text-right" value="1"></td>';
-            html += '<td class="total text-right">' + arr.eq(i).attr('data-price') + '</td>';
+            html += '<td><input type="text" data-type="currency" name="price[]" class="form-control currency text-right"></td>';
+            html += '<td><input type="number" name="amount[]" class="form-control text-right" ></td>';
+            html += '<td class="total text-right"></td>';
             html += '</tr>';
-            totalPrice += parseInt(arr.eq(i).attr('data-priceInt'));
-            totalAmount++;
+            // totalPrice += parseInt(arr.eq(i).attr('data-priceInt'));
+            // totalAmount++;
         }
 
         $('.list_product').html(html);
@@ -56,7 +56,7 @@ $(document).ready(function() {
 
         });
         $('input[name="amount[]"]').on('change', function() {
-            price = $(this).parent().prev().find('input[name="price[]"]').val().replace(/\,/g, '');
+            price = $(this).parent().prev().find('input[name="price[]"]').val().replace(/\,/g, '') || 0;
             total = parseInt(price) * parseInt($(this).val());
             $(this).parent().next().html(formatNumber(total + ""));
             updateTotal();
@@ -80,13 +80,13 @@ $(document).ready(function() {
         for (let i = 0; i < arrtotal.length; i++) {
             el = arrtotal.eq(i).html().replace(/\,/g, '');
             sumTotal += parseInt(el);
-            el = arramount.eq(i).val().replace(/\,/g, '');
+            el = arramount.eq(i).val().replace(/\,/g, '') || 0;
             sumAmount += parseInt(el);
         }
-        $('.totalPrice').html(formatNumber(sumTotal + ""));
-        $('.totalAmount').html(sumAmount);
+        $('.totalPrice').html(formatNumber(sumTotal + "")+'&nbsp');
+        $('.totalAmount').html(sumAmount+'&nbsp');
         sumTotal += parseInt($('.transport').val().replace(/\,/g, ''));
-        $('.sumAll').html(formatNumber(sumTotal + ""));
+        $('.sumAll').html(formatNumber(sumTotal + "")+'&nbsp');
     }
 
     $('#saveProvider').on('click', function() {
